@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Academy - Jamadarbari Pathar, Assam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://placehold.co/1200x600/a8e6cf/333333?text=Smiling+Students');
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4;
+        }
+        .section-subtitle {
+            @apply text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-teal-700">
+                <i class="fas fa-school mr-2"></i>Sunrise Academy
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-gray-600 hover:text-teal-600 transition duration-300">About Us</a>
+                <a href="#academics" class="text-gray-600 hover:text-teal-600 transition duration-300">Academics</a>
+                <a href="#gallery" class="text-gray-600 hover:text-teal-600 transition duration-300">Gallery</a>
+                <a href="#admissions" class="text-gray-600 hover:text-teal-600 transition duration-300">Admissions</a>
+                <a href="#contact" class="text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden flex items-center">
+                <i class="fas fa-bars text-teal-700 text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-gray-600 hover:text-teal-600">About Us</a>
+            <a href="#academics" class="block py-2 text-gray-600 hover:text-teal-600">Academics</a>
+            <a href="#gallery" class="block py-2 text-gray-600 hover:text-teal-600">Gallery</a>
+            <a href="#admissions" class="block py-2 text-gray-600 hover:text-teal-600">Admissions</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-teal-600">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg text-white h-[60vh] flex items-center">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Nurturing Future Leaders in Assam</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Welcome to Sunrise Academy, Jamadarbari Pathar. A place for quality education and holistic development.</p>
+                <a href="#admissions" class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Admissions Open</a>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Welcome to Sunrise Academy</h2>
+                <p class="section-subtitle">Fostering a love for learning in the heart of our community since 2005.</p>
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x400/81c784/ffffff?text=Our+Campus" alt="School Campus" class="rounded-lg shadow-xl w-full">
+                    </div>
+                    <div class="md:w-1/2 text-gray-700 space-y-4">
+                        <p><strong>Our Mission:</strong> To provide accessible, high-quality education that empowers students with knowledge, skills, and values to succeed in a changing world. We are dedicated to creating a safe, respectful, and inclusive environment.</p>
+                        <p><strong>Our Vision:</strong> To be a leading educational institution in the region, recognized for academic excellence and for nurturing responsible, compassionate, and lifelong learners who contribute positively to society.</p>
+                        <p>Located in the serene surroundings of Jamadarbari Pathar, our school provides a perfect atmosphere for learning and growth, blending modern teaching techniques with traditional values.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academics Section -->
+        <section id="academics" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Our Academic Programs</h2>
+                <p class="section-subtitle">A balanced curriculum designed for comprehensive student development.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition duration-300">
+                        <div class="text-4xl text-teal-600 mb-4"><i class="fas fa-child"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Primary School</h3>
+                        <p class="text-gray-600">Focus on foundational literacy, numeracy, and developing curiosity through play-based learning.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition duration-300">
+                        <div class="text-4xl text-teal-600 mb-4"><i class="fas fa-book-open-reader"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Middle School</h3>
+                        <p class="text-gray-600">Strengthening core subjects and encouraging critical thinking, collaboration, and problem-solving skills.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center transform hover:-translate-y-2 transition duration-300">
+                        <div class="text-4xl text-teal-600 mb-4"><i class="fas fa-atom"></i></div>
+                        <h3 class="text-xl font-bold mb-2">High School</h3>
+                        <p class="text-gray-600">Preparing students for board examinations and future careers with specialized subject streams and guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Glimpses of Our Campus Life</h2>
+                <p class="section-subtitle">A picture is worth a thousand words. Explore moments from our school.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/ffd1dc/333333?text=Sports+Day" alt="Sports Day" class="w-full h-full object-cover transform hover:scale-110 transition duration-300"></div>
+                    <div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/a8e6cf/333333?text=Classroom" alt="Classroom" class="w-full h-full object-cover transform hover:scale-110 transition duration-300"></div>
+                    <div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/dcedc1/333333?text=Science+Fair" alt="Science Fair" class="w-full h-full object-cover transform hover:scale-110 transition duration-300"></div>
+                    <div class="overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/ff8a65/ffffff?text=Annual+Day" alt="Annual Day" class="w-full h-full object-cover transform hover:scale-110 transition duration-300"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admissions Section -->
+        <section id="admissions" class="py-20 bg-teal-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title">Join Our Family</h2>
+                <p class="section-subtitle">We are excited to welcome new students for the upcoming academic year. Here's how to apply.</p>
+                <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg text-left">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Admission Process for 2026-2027</h3>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li>Pick up the admission form from the school office between 9:00 AM and 2:00 PM.</li>
+                        <li>Submit the completed form along with required documents (Birth Certificate, Previous Marksheet, Transfer Certificate, Photographs).</li>
+                        <li>A simple interaction session will be scheduled for the student and parents.</li>
+                        <li>Admission results will be communicated via phone or displayed on the school notice board.</li>
+                    </ol>
+                    <p class="mt-6 font-semibold">For more details, please contact our admission office at <a href="tel:+919876543210" class="text-teal-600 hover:underline">+91 98765 43210</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-subtitle">We are here to help. Reach out to us with any questions.</p>
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/2 bg-gray-100 p-8 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">Contact Information</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <p><i class="fas fa-map-marker-alt mr-3 text-teal-600"></i>Sunrise Academy<br>Jamadarbari Pathar, Assam, India</p>
+                            <p><i class="fas fa-phone mr-3 text-teal-600"></i><a href="tel:+919876543210" class="hover:text-teal-600">+91 98765 43210</a></p>
+                            <p><i class="fas fa-envelope mr-3 text-teal-600"></i><a href="mailto:info@sunriseacademyassam.com" class="hover:text-teal-600">info@sunriseacademyassam.com</a></p>
+                            <p><i class="fas fa-clock mr-3 text-teal-600"></i><strong>Office Hours:</strong> Mon - Sat, 8:30 AM to 3:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2">
+                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114588.64188358478!2d92.74312894562546!3d26.177726435011707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3745a589505a75bd%3A0x82e66518f5cf35e!2sNagaon%2C%20Assam!5e0!3m2!1sen!2sin!4v1663435427139!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg shadow-md"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <span id="year"></span> Sunrise Academy, Jamadarbari Pathar. All Rights Reserved.</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu on link click
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
