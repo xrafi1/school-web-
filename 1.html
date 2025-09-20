@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafi University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+
+        .carousel-item {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-md p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.ibb.co/r2tP3wzb/Blue-Modern-Initials-Letter-A-University-Logo.png" alt="Rafi University Logo" class="h-10 w-10 rounded-full">
+                <h1 class="text-2xl font-bold text-gray-900">Rafi University</h1>
+            </div>
+            <!-- Simple Navigation (for future use) -->
+            <nav class="hidden md:flex space-x-6 text-gray-600 font-medium">
+                <a href="#intro" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="#messages" class="hover:text-blue-600 transition-colors">Messages</a>
+                <a href="#vision" class="hover:text-blue-600 transition-colors">Our Vision</a>
+                <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+                <a href="#numbers" class="hover:text-blue-600 transition-colors">Statistics</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Carousel -->
+    <section id="hero" class="relative w-full overflow-hidden h-[60vh] md:h-[80vh]">
+        <div class="carousel-container absolute inset-0">
+            <div class="carousel-item active absolute inset-0">
+                <img src="https://i.ibb.co/mFcNS7mW/pexels-joseph-fuller-3673812-5611707.jpg" alt="University Campus" class="w-full h-full object-cover">
+            </div>
+            <div class="carousel-item absolute inset-0">
+                <img src="https://i.ibb.co/n8tBWSBC/pexels-gryziu-31207005.jpg" alt="Graduation Ceremony" class="w-full h-full object-cover">
+            </div>
+            <div class="carousel-item absolute inset-0">
+                <img src="https://i.ibb.co/KjjmGSKY/pexels-einfoto-2350925.jpg" alt="Students in Classroom" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white p-4 text-center">
+                <h2 class="text-4xl md:text-6xl font-extrabold tracking-tight">
+                    Welcome to Rafi University
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-12 space-y-20">
+
+        <!-- Introduction Section -->
+        <section id="intro" class="flex flex-col lg:flex-row items-center gap-10 fade-in">
+            <div class="lg:w-1/2">
+                <img src="https://i.ibb.co/VpDq0zyw/pexels-gu-bra-11680150-6477521.jpg" alt="Introduction Image" class="w-full h-full object-cover rounded-3xl shadow-lg">
+            </div>
+            <div class="lg:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Us</h2>
+                <p class="text-gray-700 leading-relaxed text-lg">
+                    Rafi University stands as a beacon of academic excellence and holistic development. Our commitment is to foster a dynamic learning environment where students can thrive, innovate, and lead. We believe in providing a comprehensive education that goes beyond textbooks, preparing our students to be compassionate, responsible, and globally-minded citizens. Our dedicated faculty, state-of-the-art facilities, and vibrant campus life create the perfect ecosystem for intellectual growth and personal enrichment.
+                </p>
+            </div>
+        </section>
+
+        <!-- Principal & Director's Messages -->
+        <section id="messages" class="space-y-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8 fade-in">Messages from Leadership</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Principal's Message -->
+                <div class="card p-8 bg-white rounded-3xl text-center flex flex-col items-center fade-in">
+                    <img src="https://i.ibb.co/pBQyBZy4/2859-c78201580cd5d165bdf0cf9d0301d85c-8-9-2025-2-11-12-pm.jpg" alt="Principal Rafi Sheikh" class="w-32 h-32 md:w-40 md:h-40 rounded-full mb-4 object-cover border-4 border-blue-200">
+                    <h3 class="text-xl font-semibold text-gray-900">Rafi Sheikh</h3>
+                    <p class="text-blue-600 font-medium mb-4">Principal</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        "Education is not just about acquiring knowledge, but about shaping character and building a foundation for a lifetime of learning. We are dedicated to nurturing every student's potential and preparing them to face the challenges of tomorrow with confidence and integrity."
+                    </p>
+                </div>
+                <!-- Director's Message -->
+                <div class="card p-8 bg-white rounded-3xl text-center flex flex-col items-center fade-in">
+                    <img src="https://i.ibb.co/rfk0ZhFW/3915-07adb0df0eec8eb5793f7a0669c4a78a-11-9-2025-1-18-14-am.jpg" alt="Director Rafi Sheikh" class="w-32 h-32 md:w-40 md:h-40 rounded-full mb-4 object-cover border-4 border-blue-200">
+                    <h3 class="text-xl font-semibold text-gray-900">Rafi Sheikh</h3>
+                    <p class="text-blue-600 font-medium mb-4">Director</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        "Our vision is to empower students to become leaders who are not only academically brilliant but also socially responsible. We aim to instill a global perspective while staying true to our cultural roots, ensuring our students are well-rounded and ready to make a positive impact on the world."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision & Mission Section -->
+        <section id="vision" class="space-y-12 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">Our Vision & Mission</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Our Vision -->
+                <div class="p-8 bg-white rounded-3xl card flex flex-col items-center text-center">
+                    <img src="https://i.ibb.co/ZvpmPB9/pexels-pixabay-159775.jpg" alt="Vision Image" class="w-full h-48 object-cover rounded-2xl mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        We aspire to develop socially conscious citizens of tomorrow who will provide leadership in all walks of life.
+                    </p>
+                </div>
+                <!-- Our Mission -->
+                <div class="p-8 bg-white rounded-3xl card flex flex-col items-center text-center">
+                    <img src="https://i.ibb.co/Y49wBz3P/pexels-pavel-danilyuk-7944238.jpg" alt="Mission Image" class="w-full h-48 object-cover rounded-2xl mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Mission</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Shaping Indian souls with a Global vision.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Features Section -->
+        <section id="features" class="space-y-12 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">Our Special Features</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature Card Template -->
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M12 20.057a4 4 0 001.03-.224l-.004-.001m-2.056.225a4 4 0 011.026 0l-.004.001zM15 16l-3-3l-3 3M12 13V4m0 9v-9m0 9a4 4 0 110-5.292" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Qualified and experienced teachers.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 4.04A11.955 11.955 0 00.382 12a11.955 11.955 0 008.618 4.04A11.955 11.955 0 0112 21.056a11.955 11.955 0 018.618-4.04 11.955 11.955 0 00-8.618-10.012z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Disciplined and quality education.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Value-based education.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L18 10l-4-4l-8.25 7.5L6 17z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Audio-visual classes.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Communicative approaches to language teaching.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5C12 5.67 11.33 5 10.5 5H6C4.89 5 4 5.89 4 7v10c0 1.11 0.89 2 2 2h4.5c0.83 0 1.5-0.67 1.5-1.5V6.5zM12 6.5C12 5.67 11.33 5 10.5 5h-4.5" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Conceptual development through various teaching material aids.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17.25V21h3v-3h3v3h3v-3H9zM19 14V3h-2v11h2zM7 14v7H5v-7h2z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Well-equipped science and computer lab.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0-2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM12 15c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Spacious and airy classrooms.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 119.21 3.99a9 9 0 0011.79 8.8z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Excellent arrangement for extra co-curricular activities.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM12 2a10 10 0 100 20 10 10 0 000-20z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Opportunity for personality development.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 11h-4V7a4 4 0 00-8 0v4H1a1 1 0 00-1 1v6a1 1 0 001 1h4v4a1 1 0 001 1h6a1 1 0 001-1v-4h4a1 1 0 001-1v-6a1 1 0 00-1-1z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Encouragement towards innovative ideas.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">All-round development of children.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h-2m-2 0h2m-2 0V8m0 2v2m-2-2h2m0-2h-2m0 2h2" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">To make the children aware and proud of their rich cultural heritage.</p>
+                </div>
+                <div class="bg-blue-100 p-6 rounded-2xl card flex items-center space-x-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Making the child a good and useful citizen to build a stronger nation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Numbers Speak Section -->
+        <section id="numbers" class="space-y-12 text-center fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-8">Our Numbers Speak</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Total Students -->
+                <div class="p-8 bg-white rounded-3xl card">
+                    <div class="text-5xl md:text-7xl font-extrabold text-blue-600 mb-4">550+</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Total Students</h3>
+                    <p class="text-gray-600">
+                        Rafi University started with 105 students and at present, we have more than 550 students.
+                    </p>
+                </div>
+                <!-- Passout Students -->
+                <div class="p-8 bg-white rounded-3xl card">
+                    <div class="text-5xl md:text-7xl font-extrabold text-blue-600 mb-4">36</div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Passout Students</h3>
+                    <p class="text-gray-600">
+                        In the past three years, 36 students have successfully passed out from the 10th grade at Rafi University.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-8 mt-12 text-center rounded-t-3xl">
+        <p>&copy; 2025 Rafi University. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+
+        function showNextImage() {
+            carouselItems[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.add('active');
+        }
+
+        setInterval(showNextImage, 5000); // Change image every 5 seconds
+
+        // Intersection Observer for fade-in effect
+        const fadeInElements = document.querySelectorAll('.fade-in');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        fadeInElements.forEach(element => {
+            observer.observe(element);
+        });
+
+    </script>
+</body>
+</html>
