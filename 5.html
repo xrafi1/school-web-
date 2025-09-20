@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Academy - Jamadarbari Pathar, Assam</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+        .glass-header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-gray-800 text-center mb-4;
+        }
+        .section-subtitle {
+            @apply text-lg text-gray-500 text-center max-w-2xl mx-auto mb-12;
+        }
+        .card-hover {
+            @apply transition duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl;
+        }
+        /* Custom animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-800">
+                <i class="fas fa-school-flag mr-2"></i>Sunrise Academy
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">About</a>
+                <a href="#academics" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Academics</a>
+                <a href="#gallery" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Gallery</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium transition duration-300">Contact</a>
+                <a href="#admissions" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-2 px-5 rounded-full transition duration-300 transform hover:scale-105">Admissions</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden flex items-center">
+                <i class="fas fa-bars text-blue-800 text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-gray-600 hover:text-blue-600">About</a>
+            <a href="#academics" class="block py-2 text-gray-600 hover:text-blue-600">Academics</a>
+            <a href="#gallery" class="block py-2 text-gray-600 hover:text-blue-600">Gallery</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-blue-600">Contact</a>
+            <a href="#admissions" class="block mt-2 py-2 text-center bg-yellow-400 text-blue-900 rounded-full font-bold">Admissions</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-gradient text-white">
+            <div class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">Empowering Minds, Shaping Futures.</h1>
+                    <p class="text-lg md:text-xl text-blue-100 mb-8">Sunrise Academy in Jamadarbari Pathar is where learning comes alive. Discover an environment that inspires excellence.</p>
+                    <a href="#about" class="bg-yellow-400 hover:bg-yellow-500 text-blue-900 font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 inline-block">Learn More</a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x450/ffffff/1e3a8a?text=Happy+Students" alt="Happy Students" class="rounded-2xl shadow-2xl mx-auto">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    <div class="lg:w-1/2">
+                        <img src="https://placehold.co/600x400/dbeafe/1e3a8a?text=Our+Beautiful+Campus" alt="School Campus" class="rounded-xl shadow-lg w-full">
+                    </div>
+                    <div class="lg:w-1/2 text-gray-700">
+                        <h2 class="text-3xl font-bold mb-4 text-blue-900">Welcome to Our Community of Learners</h2>
+                        <p class="mb-4">Since 2005, Sunrise Academy has been a cornerstone of education in Jamadarbari Pathar, Assam. We are committed to fostering an environment where students not only achieve academic excellence but also develop strong character and a passion for lifelong learning.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fas fa-bullseye"></i></div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-semibold">Our Mission</h3>
+                                    <p class="text-gray-600">To provide a stimulating learning environment with a technological orientation, which maximizes individual potential.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fas fa-eye"></i></div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-semibold">Our Vision</h3>
+                                    <p class="text-gray-600">To inspire our students to be responsible global citizens who can face the future with confidence and courage.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Academics Section -->
+        <section id="academics" class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">A Path for Every Learner</h2>
+                <p class="section-subtitle">Our curriculum is thoughtfully designed to cater to students at every stage of their educational journey.</p>
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="text-5xl text-yellow-500 mb-4"><i class="fas fa-pencil-ruler"></i></div>
+                        <h3 class="text-xl font-bold mb-2 text-blue-900">Primary (I-V)</h3>
+                        <p class="text-gray-600">Building a strong foundation with a focus on curiosity, creativity, and core concepts in a nurturing environment.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="text-5xl text-blue-500 mb-4"><i class="fas fa-lightbulb"></i></div>
+                        <h3 class="text-xl font-bold mb-2 text-blue-900">Middle (VI-VIII)</h3>
+                        <p class="text-gray-600">Encouraging exploration and critical thinking to help students discover their passions and strengths.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg card-hover">
+                        <div class="text-5xl text-indigo-500 mb-4"><i class="fas fa-graduation-cap"></i></div>
+                        <h3 class="text-xl font-bold mb-2 text-blue-900">Secondary (IX-X)</h3>
+                        <p class="text-gray-600">Focused preparation for board exams and beyond, equipping students with knowledge and skills for success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Life at Sunrise Academy</h2>
+                <p class="section-subtitle">Explore the vibrant moments that make our school a special place to be.</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="#" class="group block overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/fca5a5/4c0519?text=Culture+Fest" alt="Cultural Fest" class="w-full h-full object-cover transition duration-500 group-hover:scale-110"></a>
+                    <a href="#" class="group block overflow-hidden rounded-lg shadow-lg col-span-2"><img src="https://placehold.co/800x400/6ee7b7/064e3b?text=Sports+Meet" alt="Sports Meet" class="w-full h-full object-cover transition duration-500 group-hover:scale-110"></a>
+                    <a href="#" class="group block overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/93c5fd/1e3a8a?text=Science+Lab" alt="Science Lab" class="w-full h-full object-cover transition duration-500 group-hover:scale-110"></a>
+                    <a href="#" class="group block overflow-hidden rounded-lg shadow-lg col-span-2"><img src="https://placehold.co/800x400/c4b5fd/4c1d95?text=Art+Exhibition" alt="Art Exhibition" class="w-full h-full object-cover transition duration-500 group-hover:scale-110"></a>
+                    <a href="#" class="group block overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/fde047/854d0e?text=Library+Time" alt="Library" class="w-full h-full object-cover transition duration-500 group-hover:scale-110"></a>
+                    <a href="#" class="group block overflow-hidden rounded-lg shadow-lg"><img src="https://placehold.co/400x400/fdba74/9a3412?text=Team+Project" alt="Project Work" class="w-full h-full object-cover transition duration-500 group-hover:scale-110"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admissions CTA Section -->
+        <section id="admissions" class="py-24 bg-blue-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900">Ready to Join Us?</h2>
+                <p class="text-lg text-gray-600 mt-4 mb-8 max-w-2xl mx-auto">Admissions for the 2026-2027 academic year are now open. Take the first step towards a bright future for your child.</p>
+                <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 rounded-full transition duration-300 transform hover:scale-105 inline-block text-lg">Inquire Now</a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">We'd Love to Hear From You</h2>
+                <p class="section-subtitle">Whether you have a question about admissions, academics, or anything else, our team is ready to answer all your questions.</p>
+                <div class="flex flex-col lg:flex-row gap-12 bg-gray-50 p-8 md:p-12 rounded-2xl shadow-lg">
+                    <div class="lg:w-1/2">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-900">Our Location</h3>
+                        <div class="space-y-4 text-gray-700">
+                             <p class="flex items-start"><i class="fas fa-map-marker-alt mr-4 mt-1 text-blue-600"></i><span><strong>Sunrise Academy</strong><br>Jamadarbari Pathar, Nagaon,<br>Assam, India</span></p>
+                            <p class="flex items-center"><i class="fas fa-phone mr-4 text-blue-600"></i><a href="tel:+919876543210" class="hover:text-blue-600">+91 98765 43210</a></p>
+                            <p class="flex items-center"><i class="fas fa-envelope mr-4 text-blue-600"></i><a href="mailto:info@sunriseacademyassam.com" class="hover:text-blue-600">info@sunriseacademyassam.com</a></p>
+                            <p class="flex items-center"><i class="fas fa-clock mr-4 text-blue-600"></i><span><strong>Office Hours:</strong> Mon - Sat, 8:30 AM to 3:00 PM</span></p>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <div class="rounded-lg overflow-hidden shadow-md">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114588.64188358478!2d92.74312894562546!3d26.177726435011707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3745a589505a75bd%3A0x82e66518f5cf35e!2sNagaon%2C%20Assam!5e0!3m2!1sen!2sin!4v1663435427139!5m2!1sen!2sin" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white">
+        <div class="container mx-auto px-6 py-10 text-center">
+            <p>&copy; <span id="year"></span> Sunrise Academy, Jamadarbari Pathar. All Rights Reserved.</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="text-blue-200 hover:text-white transition duration-300"><i class="fab fa-facebook-f fa-lg"></i></a>
+                <a href="#" class="text-blue-200 hover:text-white transition duration-300"><i class="fab fa-youtube fa-lg"></i></a>
+                <a href="#" class="text-blue-200 hover:text-white transition duration-300"><i class="fab fa-instagram fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // Check if the link is for the admissions button, which has its own page logic
+                if (this.getAttribute('href') !== '#admissions' || this.parentElement.classList.contains('md:hidden')) {
+                     e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+               
+                // Close mobile menu on link click
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Add scroll-triggered animations to sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0'; // Initially hide sections
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
+
+
