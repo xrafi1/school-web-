@@ -14,13 +14,11 @@
             --accent-blue: #5a8bf7;
             --light-bg: #f5f7f9;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--light-bg);
             color: #1a202c;
         }
-
         .carousel-item {
             opacity: 0;
             transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -28,28 +26,23 @@
         .carousel-item.active {
             opacity: 1;
         }
-
         .slide-up {
             animation: slideUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             opacity: 0;
             transform: translateY(60px);
         }
-        
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(60px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .fade-in {
             animation: fadeIn 1.2s ease-out forwards;
             opacity: 0;
         }
-        
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         .card {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -58,8 +51,12 @@
             transform: translateY(-8px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
         }
-
-        /* Responsive Hero Text */
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
         #hero .hero-text {
             font-size: 2.5rem;
             line-height: 1.2;
@@ -70,37 +67,47 @@
                 line-height: 1.1;
             }
         }
-        .modal-overlay {
+        /* Loader styles */
+        .loader-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
-
-        .modal {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 90%;
-            width: 500px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid var(--primary-blue);
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
+    <!-- Loading Spinner -->
+    <div id="loader" class="loader-container">
+        <div class="loader"></div>
+    </div>
+
     <!-- Header -->
     <header class="bg-white sticky top-0 z-50 shadow-xl p-4 md:p-6">
         <div class="container mx-auto flex items-center justify-between">
             <div class="flex items-center space-x-4">
-                <img src="https://i.ibb.co/r2tP3wzb/Blue-Modern-Initials-Letter-A-University-Logo.png" alt="Rafi University Logo" class="h-12 w-12 rounded-full shadow-lg">
-                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Rafi University</h1>
+                <img id="uni-logo" src="https://placehold.co/48x48/EFEFEF/333333?text=L" alt="Rafi University Logo" class="h-12 w-12 rounded-full shadow-lg">
+                <h1 id="uni-name" class="text-3xl font-extrabold text-gray-900 tracking-tight">Loading...</h1>
             </div>
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-8 text-lg font-medium text-gray-700">
@@ -109,10 +116,7 @@
                 <a href="#vision" class="hover:text-blue-600 transition-colors">Our Vision</a>
                 <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
                 <a href="#numbers" class="hover:text-blue-600 transition-colors">Statistics</a>
-                <a href="#notice-board" class="hover:text-blue-600 transition-colors">Notice Board</a>
-                <a href="#admissions" class="hover:text-blue-600 transition-colors">Admissions</a>
                 <a href="#contact" class="hover:text-blue-600 transition-colors">Contact Us</a>
-                <a href="#admin-panel" class="hover:text-blue-600 transition-colors">Admin Panel</a>
             </nav>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
@@ -124,41 +128,30 @@
     </header>
 
     <!-- Mobile Navigation Menu (hidden by default) -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-6 transition-all duration-300 ease-in-out">
+    <div id="mobile-menu" class="mobile-menu md:hidden bg-white shadow-lg py-6 transition-all duration-300 ease-in-out">
         <nav class="flex flex-col items-center space-y-6 text-lg font-medium text-gray-700">
             <a href="#intro" class="hover:text-blue-600 transition-colors">About Us</a>
             <a href="#messages" class="hover:text-blue-600 transition-colors">Messages</a>
             <a href="#vision" class="hover:text-blue-600 transition-colors">Our Vision</a>
             <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
             <a href="#numbers" class="hover:text-blue-600 transition-colors">Statistics</a>
-            <a href="#notice-board" class="hover:text-blue-600 transition-colors">Notice Board</a>
-            <a href="#admissions" class="hover:text-blue-600 transition-colors">Admissions</a>
             <a href="#contact" class="hover:text-blue-600 transition-colors">Contact Us</a>
-            <a href="#admin-panel" class="hover:text-blue-600 transition-colors">Admin Panel</a>
         </nav>
     </div>
 
     <!-- Banner Carousel -->
     <section id="hero" class="relative w-full overflow-hidden h-[65vh] md:h-[85vh] bg-gray-900">
-        <div class="carousel-container absolute inset-0">
-            <div class="carousel-item active absolute inset-0">
-                <img src="https://i.ibb.co/mFcNS7mW/pexels-joseph-fuller-3673812-5611707.jpg" alt="University Campus" class="w-full h-full object-cover opacity-80">
-            </div>
-            <div class="carousel-item absolute inset-0">
-                <img src="https://i.ibb.co/n8tBWSBC/pexels-gryziu-31207005.jpg" alt="Graduation Ceremony" class="w-full h-full object-cover opacity-80">
-            </div>
-            <div class="carousel-item absolute inset-0">
-                <img src="https://i.ibb.co/KjjmGSKY/pexels-einfoto-2350925.jpg" alt="Students in Classroom" class="w-full h-full object-cover opacity-80">
-            </div>
-            <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 text-center">
-                <div class="space-y-6">
-                    <h2 class="hero-text font-extrabold tracking-tight text-white slide-up">
-                        Welcome to Rafi University
-                    </h2>
-                    <a href="#intro" class="inline-block px-12 py-4 rounded-full text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors transform hover:scale-105 slide-up" style="animation-delay: 0.5s;">
-                        Discover More
-                    </a>
-                </div>
+        <div id="carousel-container" class="carousel-container absolute inset-0">
+            <!-- Carousel items will be injected here by JavaScript -->
+        </div>
+        <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 text-center">
+            <div class="space-y-6">
+                <h2 id="hero-title" class="hero-text font-extrabold tracking-tight text-white slide-up">
+                    <!-- Hero title will be injected here -->
+                </h2>
+                <a id="hero-button" href="#" class="inline-block px-12 py-4 rounded-full text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors transform hover:scale-105 slide-up" style="animation-delay: 0.5s;">
+                    <!-- Hero button text will be injected here -->
+                </a>
             </div>
         </div>
     </section>
@@ -168,12 +161,12 @@
         <!-- Introduction Section -->
         <section id="intro" class="flex flex-col lg:flex-row-reverse items-center gap-16">
             <div class="lg:w-1/2 slide-up">
-                <img src="https://i.ibb.co/VpDq0zyw/pexels-gu-bra-11680150-6477521.jpg" alt="Introduction Image" class="w-full h-full object-cover rounded-[2rem] shadow-2xl">
+                <img id="about-image" src="https://placehold.co/600x400/EFEFEF/333333?text=... " alt="Introduction Image" class="w-full h-full object-cover rounded-[2rem] shadow-2xl">
             </div>
             <div class="lg:w-1/2 slide-up">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">About Our Commitment to Excellence</h2>
-                <p id="intro-text" class="text-gray-700 leading-relaxed text-lg">
-                    <!-- Content will be populated by Firestore -->
+                <h2 id="about-title" class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">Loading...</h2>
+                <p id="about-text" class="text-gray-700 leading-relaxed text-lg">
+                    Loading...
                 </p>
             </div>
         </section>
@@ -181,48 +174,16 @@
         <!-- Principal & Director's Messages -->
         <section id="messages" class="space-y-16">
             <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Messages from Our Leadership</h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Principal's Message -->
-                <div class="card p-10 bg-white rounded-3xl text-center flex flex-col items-center slide-up" style="animation-delay: 0.1s;">
-                    <img src="https://i.ibb.co/pBQyBZy4/2859-c78201580cd5d165bdf0cf9d0301d85c-8-9-2025-2-11-12-pm.jpg" alt="Principal Rafi Sheikh" class="w-44 h-44 md:w-56 md:h-56 rounded-full mb-6 object-cover border-4 border-blue-400">
-                    <h3 class="text-2xl font-semibold text-gray-900">Rafi Sheikh</h3>
-                    <p class="text-blue-600 font-medium mb-4">Principal</p>
-                    <p id="principal-message" class="text-gray-600 leading-relaxed">
-                        <!-- Content will be populated by Firestore -->
-                    </p>
-                </div>
-                <!-- Director's Message -->
-                <div class="card p-10 bg-white rounded-3xl text-center flex flex-col items-center slide-up" style="animation-delay: 0.3s;">
-                    <img src="https://i.ibb.co/rfk0ZhFW/3915-07adb0df0eec8eb5793f7a0669c4a78a-11-9-2025-1-18-14-am.jpg" alt="Director Rafi Sheikh" class="w-44 h-44 md:w-56 md:h-56 rounded-full mb-6 object-cover border-4 border-blue-400">
-                    <h3 class="text-2xl font-semibold text-gray-900">Rafi Sheikh</h3>
-                    <p class="text-blue-600 font-medium mb-4">Director</p>
-                    <p id="director-message" class="text-gray-600 leading-relaxed">
-                        <!-- Content will be populated by Firestore -->
-                    </p>
-                </div>
+            <div id="messages-container" class="grid md:grid-cols-2 gap-12">
+                <!-- Messages will be injected here by JavaScript -->
             </div>
         </section>
 
         <!-- Vision & Mission Section -->
         <section id="vision" class="space-y-16">
             <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Our Vision & Mission</h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Our Vision -->
-                <div class="p-10 bg-white rounded-3xl card flex flex-col items-center text-center slide-up" style="animation-delay: 0.1s;">
-                    <img src="https://i.ibb.co/ZvpmPB9/pexels-pixabay-159775.jpg" alt="Vision Image" class="w-full h-72 object-cover rounded-2xl mb-6">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision</h3>
-                    <p id="vision-text" class="text-gray-600 leading-relaxed">
-                        <!-- Content will be populated by Firestore -->
-                    </p>
-                </div>
-                <!-- Our Mission -->
-                <div class="p-10 bg-white rounded-3xl card flex flex-col items-center text-center slide-up" style="animation-delay: 0.3s;">
-                    <img src="https://i.ibb.co/Y49wBz3P/pexels-pavel-danilyuk-7944238.jpg" alt="Mission Image" class="w-full h-72 object-cover rounded-2xl mb-6">
-                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Mission</h3>
-                    <p id="mission-text" class="text-gray-600 leading-relaxed">
-                        <!-- Content will be populated by Firestore -->
-                    </p>
-                </div>
+            <div id="vision-mission-container" class="grid md:grid-cols-2 gap-12">
+                <!-- Vision & Mission will be injected here by JavaScript -->
             </div>
         </section>
 
@@ -230,53 +191,15 @@
         <section id="features" class="space-y-16">
             <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Our Special Features</h2>
             <div id="features-container" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <p id="features-loading" class="text-center text-gray-500 col-span-full">Loading features...</p>
-                <!-- Feature Cards will be dynamically added here -->
+                <!-- Features will be injected here by JavaScript -->
             </div>
         </section>
 
         <!-- Our Numbers Speak Section -->
         <section id="numbers" class="space-y-16 text-center py-24 px-4 bg-[var(--primary-blue)] rounded-[3rem] text-white slide-up">
             <h2 class="text-4xl md:text-5xl font-bold mb-8 tracking-wide">Our Numbers Speak</h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Total Students -->
-                <div class="p-10 bg-white/10 rounded-3xl card backdrop-blur-md">
-                    <div id="total-students" class="text-6xl md:text-8xl font-extrabold mb-4">
-                        <!-- Content will be populated by Firestore -->
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Total Students</h3>
-                    <p id="total-students-text" class="text-gray-200">
-                        <!-- Content will be populated by Firestore -->
-                    </p>
-                </div>
-                <!-- Passout Students -->
-                <div class="p-10 bg-white/10 rounded-3xl card backdrop-blur-md">
-                    <div id="passout-students" class="text-6xl md:text-8xl font-extrabold mb-4">
-                        <!-- Content will be populated by Firestore -->
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Passout Students</h3>
-                    <p id="passout-students-text" class="text-gray-200">
-                        <!-- Content will be populated by Firestore -->
-                    </p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Notice Board Section -->
-        <section id="notice-board" class="space-y-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Notice Board</h2>
-            <div id="notices-container" class="bg-white p-4 sm:p-6 md:p-10 rounded-3xl card slide-up">
-                <!-- Notices will be dynamically added here -->
-                <p id="notices-loading" class="text-center text-gray-500">Loading notices...</p>
-                <ul id="notices-list" class="space-y-4"></ul>
-            </div>
-        </section>
-
-        <!-- Admission Form Section -->
-        <section id="admissions" class="space-y-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Apply for Admission</h2>
-            <div class="bg-white p-4 sm:p-6 md:p-10 rounded-3xl card slide-up" style="animation-delay: 0.2s;">
-                <iframe src="https://script.google.com/macros/s/AKfycbyuZPSSGDsLppaxlobKGTY1GV6YzQ3B173jjtcHTHfqEM234XBroVcFi68FH7d8WO6a/exec" class="w-full h-[80vh] md:h-[100vh]" frameborder="0">Loading...</iframe>
+            <div id="stats-container" class="grid md:grid-cols-2 gap-12">
+                <!-- Stats will be injected here by JavaScript -->
             </div>
         </section>
 
@@ -295,20 +218,17 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <a href="mailto:Help@RafiUniversity.com" class="hover:text-blue-600 transition-colors">Help@RafiUniversity.com</a>
+                            <a id="contact-email1" href="mailto:..." class="hover:text-blue-600 transition-colors">Loading...</a>
                         </div>
                         <div class="flex items-center space-x-4 text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <a href="mailto:Info@RafiUniversity.com" class="hover:text-blue-600 transition-colors">Info@RafiUniversity.com</a>
+                            <a id="contact-email2" href="mailto:..." class="hover:text-blue-600 transition-colors">Loading...</a>
                         </div>
                         <div class="flex items-center space-x-4 text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.5l1.5 4.5h4l1.5-4.5H19a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11a4 4 0 100-8 4 4 0 000 8z" />
-                            </svg>
-                            <a href="tel:8876001303" class="hover:text-blue-600 transition-colors">8876001303</a>
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <a id="contact-phone" href="tel:..." class="hover:text-blue-600 transition-colors">Loading...</a>
                         </div>
                     </div>
                 </div>
@@ -316,18 +236,18 @@
                 <!-- Contact Form -->
                 <div class="bg-white p-10 rounded-3xl card slide-up" style="animation-delay: 0.3s;">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send Us a Message</h3>
-                    <form id="contact-form" class="space-y-6">
+                    <form class="space-y-6">
                         <div>
-                            <label for="contact-name" class="block text-gray-700 font-medium mb-2">Name</label>
-                            <input type="text" id="contact-name" name="name" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Name" required>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Name" required>
                         </div>
                         <div>
-                            <label for="contact-email" class="block text-gray-700 font-medium mb-2">Email</label>
-                            <input type="email" id="contact-email" name="email" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Email" required>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Email" required>
                         </div>
                         <div>
-                            <label for="contact-message" class="block text-gray-700 font-medium mb-2">Message</label>
-                            <textarea id="contact-message" name="message" rows="5" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Message" required></textarea>
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="w-full py-4 px-8 rounded-full bg-[var(--primary-blue)] text-white font-semibold hover:bg-blue-800 transition-colors transform hover:scale-105">
                             Send Message
@@ -337,590 +257,223 @@
             </div>
         </section>
 
-        <!-- Admin Panel Section -->
-        <section id="admin-panel" class="space-y-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Admin Panel</h2>
-            <div id="admin-content" class="bg-white p-4 sm:p-6 md:p-10 rounded-3xl card slide-up flex flex-col items-center">
-                <!-- Auth state will determine what is shown here -->
-                <div id="login-section" class="w-full max-w-lg space-y-6 text-center">
-                    <h3 class="text-2xl font-semibold text-gray-900">Admin Login</h3>
-                    <form id="login-form" class="space-y-4">
-                        <input type="email" id="admin-email" placeholder="Email" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" required>
-                        <input type="password" id="admin-password" placeholder="Password" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" required>
-                        <button type="submit" class="w-full py-4 px-8 rounded-full bg-[var(--primary-blue)] text-white font-semibold hover:bg-blue-800 transition-colors transform hover:scale-105">
-                            Log In
-                        </button>
-                        <p id="login-error" class="text-red-500 text-sm hidden"></p>
-                    </form>
-                </div>
-
-                <div id="admin-dashboard" class="w-full max-w-3xl space-y-12 hidden">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-2xl font-semibold text-gray-900">Dashboard</h3>
-                        <button id="logout-button" class="py-2 px-6 rounded-full bg-red-500 text-white font-semibold hover:bg-red-600 transition-colors">
-                            Log Out
-                        </button>
-                    </div>
-
-                    <!-- Manage Website Content -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-4">Update Website Content</h4>
-                        <form id="website-content-form" class="space-y-4 p-6 bg-gray-100 rounded-lg">
-                            <div>
-                                <label for="update-intro" class="block text-gray-700 font-medium mb-2">About Us</label>
-                                <textarea id="update-intro" rows="5" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
-                            </div>
-                            <div>
-                                <label for="update-principal" class="block text-gray-700 font-medium mb-2">Principal's Message</label>
-                                <textarea id="update-principal" rows="5" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
-                            </div>
-                            <div>
-                                <label for="update-director" class="block text-gray-700 font-medium mb-2">Director's Message</label>
-                                <textarea id="update-director" rows="5" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
-                            </div>
-                            <div>
-                                <label for="update-vision" class="block text-gray-700 font-medium mb-2">Our Vision</label>
-                                <textarea id="update-vision" rows="3" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
-                            </div>
-                            <div>
-                                <label for="update-mission" class="block text-gray-700 font-medium mb-2">Our Mission</label>
-                                <textarea id="update-mission" rows="3" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
-                            </div>
-                            <div>
-                                <label for="update-total-students" class="block text-gray-700 font-medium mb-2">Total Students</label>
-                                <input type="number" id="update-total-students" class="w-full p-3 rounded-lg border border-gray-300">
-                            </div>
-                            <div>
-                                <label for="update-passout-students" class="block text-gray-700 font-medium mb-2">Passout Students</label>
-                                <input type="number" id="update-passout-students" class="w-full p-3 rounded-lg border border-gray-300">
-                            </div>
-                            <button type="submit" class="w-full py-3 px-6 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
-                                Update Content
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <!-- Manage Features -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-4">Manage Special Features</h4>
-                        <form id="add-feature-form" class="space-y-4 p-6 bg-gray-100 rounded-lg">
-                            <div>
-                                <label for="feature-text" class="block text-gray-700 font-medium mb-2">Feature Description</label>
-                                <input type="text" id="feature-text" class="w-full p-3 rounded-lg border border-gray-300" required>
-                            </div>
-                            <div>
-                                <label for="feature-svg" class="block text-gray-700 font-medium mb-2">Feature SVG Code</label>
-                                <textarea id="feature-svg" rows="3" class="w-full p-3 rounded-lg border border-gray-300" placeholder="Paste the SVG code here..." required></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-3 px-6 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
-                                Add New Feature
-                            </button>
-                        </form>
-                        
-                        <div id="features-list-admin" class="mt-8 space-y-4">
-                            <p class="text-gray-500 text-center">Loading features...</p>
-                        </div>
-                    </div>
-
-                    <!-- Manage Notices -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-4">Manage Notices</h4>
-                        <form id="add-notice-form" class="space-y-4 p-6 bg-gray-100 rounded-lg">
-                            <div>
-                                <label for="notice-title" class="block text-gray-700 font-medium mb-2">Notice Title</label>
-                                <input type="text" id="notice-title" class="w-full p-3 rounded-lg border border-gray-300" required>
-                            </div>
-                            <div>
-                                <label for="notice-body" class="block text-gray-700 font-medium mb-2">Notice Content</label>
-                                <textarea id="notice-body" rows="3" class="w-full p-3 rounded-lg border border-gray-300" required></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-3 px-6 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
-                                Add New Notice
-                            </button>
-                        </form>
-                        
-                        <div id="notices-list-admin" class="mt-8 space-y-4">
-                            <!-- Notices will be managed here -->
-                            <p class="text-gray-500 text-center">Loading notices...</p>
-                        </div>
-                    </div>
-
-                    <!-- View Contact Messages -->
-                    <div>
-                        <h4 class="text-xl font-bold text-gray-800 mb-4">Contact Messages</h4>
-                        <div id="messages-list-admin" class="space-y-4 p-6 bg-gray-100 rounded-lg">
-                            <p class="text-gray-500 text-center">Loading messages...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
     </main>
-
-    <!-- Success Modal -->
-    <div id="success-modal" class="modal-overlay hidden">
-        <div class="modal">
-            <div class="flex justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500" viewBox="0 0 24 24" fill="currentColor">
-                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.707 7.293a1 1 0 00-1.414-1.414L10 11.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 000-1.414z" clip-rule="evenodd" />
-                </svg>
-            </div>
-            <p id="success-message" class="text-center text-lg font-semibold text-gray-800">
-                Message sent successfully!
-            </p>
-            <div class="flex justify-center mt-6">
-                <button id="close-modal" class="py-2 px-6 rounded-full bg-blue-600 text-white font-semibold">OK</button>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white p-10 mt-16 text-center rounded-t-[3rem]">
-        <p>&copy; 2025 Rafi University. All Rights Reserved.</p>
+        <p id="footer-text">Loading...</p>
     </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, collection, query, addDoc, deleteDoc, orderBy, getDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-        setLogLevel('debug');
+    <script>
+        // IMPORTANT: Replace this URL with your own Google Apps Script Web App URL
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVcfkSa9uur03DFDsaUUQ-9OJdzz9r-Rbdiqoa6heqDjF2nkvMpRHTe3jIQ0tnIlNB/exec';
 
-        // Global variables provided by the environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "AIzaSyAheTW0W5gtD8QtjErCoA5KnqsUdmFOn1Q",
-            authDomain: "rafi-aa3f7.firebaseapp.com",
-            projectId: "rafi-aa3f7",
-            storageBucket: "rafi-aa3f7.firebasestorage.app",
-            messagingSenderId: "304081068184",
-            appId: "1:304081068184:web:a7aae4eb4c69707faa30ed",
-            measurementId: "G-3WJ3G1BVRJ"
-        };
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        let userId = null;
-
-        // DOM Elements
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const carouselItems = document.querySelectorAll('.carousel-item');
-        const animatedElements = document.querySelectorAll('.slide-up, .fade-in');
-        const introTextEl = document.getElementById('intro-text');
-        const principalMessageEl = document.getElementById('principal-message');
-        const directorMessageEl = document.getElementById('director-message');
-        const visionTextEl = document.getElementById('vision-text');
-        const missionTextEl = document.getElementById('mission-text');
-        const totalStudentsEl = document.getElementById('total-students');
-        const totalStudentsTextEl = document.getElementById('total-students-text');
-        const passoutStudentsEl = document.getElementById('passout-students');
-        const passoutStudentsTextEl = document.getElementById('passout-students-text');
-        const featuresContainerEl = document.getElementById('features-container');
-        const featuresLoadingEl = document.getElementById('features-loading');
-        const noticesListEl = document.getElementById('notices-list');
-        const noticesLoadingEl = document.getElementById('notices-loading');
-        const loginSectionEl = document.getElementById('login-section');
-        const adminDashboardEl = document.getElementById('admin-dashboard');
-        const loginFormEl = document.getElementById('login-form');
-        const logoutButtonEl = document.getElementById('logout-button');
-        const loginErrorEl = document.getElementById('login-error');
-        const websiteContentFormEl = document.getElementById('website-content-form');
-        const addNoticeFormEl = document.getElementById('add-notice-form');
-        const noticesListAdminEl = document.getElementById('notices-list-admin');
-        const messagesListAdminEl = document.getElementById('messages-list-admin');
-        const contactFormEl = document.getElementById('contact-form');
-        const successModal = document.getElementById('success-modal');
-        const successMessage = document.getElementById('success-message');
-        const closeModalButton = document.getElementById('close-modal');
-        const addFeatureFormEl = document.getElementById('add-feature-form');
-        const featuresListAdminEl = document.getElementById('features-list-admin');
-
-        // Modal Functionality
-        function showModal(message) {
-            successMessage.textContent = message;
-            successModal.classList.remove('hidden');
-        }
-
-        function hideModal() {
-            successModal.classList.add('hidden');
-        }
-
-        closeModalButton.addEventListener('click', hideModal);
-
-        // Mobile Menu Toggle
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchWebsiteData();
+            setupMobileMenu();
         });
 
-        // Carousel functionality
-        let currentIndex = 0;
-        function showNextImage() {
-            carouselItems[currentIndex].classList.remove('active');
-            currentIndex = (currentIndex + 1) % carouselItems.length;
-            carouselItems[currentIndex].classList.add('active');
-        }
-        setInterval(showNextImage, 5000); // Change image every 5 seconds
-
-        // Intersection Observer for animations
-        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target);
+        async function fetchWebsiteData() {
+            try {
+                const response = await fetch(APPS_SCRIPT_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                const data = await response.json();
+                renderPage(data);
+            } catch (error) {
+                console.error("Failed to fetch website data:", error);
+                // Optionally display an error message to the user on the page
+                document.body.innerHTML = `<div class="text-center p-10"><h1>Error</h1><p>Could not load website content. Please check the console for details.</p></div>`;
+            } finally {
+                // Hide loader
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        }
+        
+        function renderPage(data) {
+            // Render each section with the fetched data
+            renderGeneral(data.general);
+            renderHero(data.hero);
+            renderAbout(data.about);
+            renderMessages(data.messages);
+            renderVisionMission(data.visionMission);
+            renderFeatures(data.features);
+            renderStats(data.stats);
+            renderContact(data.contact);
+            
+            // Re-initialize animations after content is loaded
+            setupAnimations();
+        }
+
+        function renderGeneral(generalData) {
+            document.title = generalData.universityName || 'Rafi University';
+            document.getElementById('uni-name').textContent = generalData.universityName;
+            document.getElementById('uni-logo').src = generalData.logoUrl;
+            document.getElementById('footer-text').innerHTML = generalData.footerText;
+        }
+
+        function renderHero(heroData) {
+            const container = document.getElementById('carousel-container');
+            if (!heroData || heroData.length === 0) return;
+            
+            let carouselHTML = '';
+            heroData.forEach((item, index) => {
+                carouselHTML += `
+                    <div class="carousel-item ${index === 0 ? 'active' : ''} absolute inset-0">
+                        <img src="${item.imageUrl}" alt="University Banner Image" class="w-full h-full object-cover opacity-80">
+                    </div>`;
             });
-        }, observerOptions);
-        animatedElements.forEach(element => { observer.observe(element); });
+            container.innerHTML = carouselHTML;
 
-        // Firebase Auth State Listener
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-                loginSectionEl.classList.add('hidden');
-                adminDashboardEl.classList.remove('hidden');
-                fetchWebsiteContent();
-                fetchNotices();
-                fetchContactMessages();
-                fetchFeatures();
-            } else {
-                userId = null;
-                loginSectionEl.classList.remove('hidden');
-                adminDashboardEl.classList.add('hidden');
-            }
-        });
+            // Update hero text and button for the first item
+            document.getElementById('hero-title').textContent = heroData[0].title;
+            const heroButton = document.getElementById('hero-button');
+            heroButton.textContent = heroData[0].buttonText;
+            heroButton.href = heroData[0].buttonLink;
 
-        // Initial Sign-in
-        async function initialAuth() {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (error) {
-                console.error("Initial auth failed:", error);
-            }
+            // Start carousel
+            setupCarousel(heroData);
         }
-        initialAuth();
 
-        // Admin Login
-        loginFormEl.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = loginFormEl['admin-email'].value;
-            const password = loginFormEl['admin-password'].value;
-            loginErrorEl.classList.add('hidden');
+        function renderAbout(aboutData) {
+            document.getElementById('about-title').textContent = aboutData.title;
+            document.getElementById('about-text').textContent = aboutData.text;
+            document.getElementById('about-image').src = aboutData.imageUrl;
+        }
 
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-            } catch (error) {
-                loginErrorEl.textContent = "Failed to log in. Please check your email and password.";
-                loginErrorEl.classList.remove('hidden');
-                console.error("Login error:", error);
-            }
-        });
+        function renderMessages(messagesData) {
+            const container = document.getElementById('messages-container');
+            let messagesHTML = '';
+            messagesData.forEach((msg, index) => {
+                messagesHTML += `
+                    <div class="card p-10 bg-white rounded-3xl text-center flex flex-col items-center slide-up" style="animation-delay: ${index * 0.2 + 0.1}s;">
+                        <img src="${msg.imageUrl}" alt="Photo of ${msg.name}" class="w-44 h-44 md:w-56 md:h-56 rounded-full mb-6 object-cover border-4 border-blue-400">
+                        <h3 class="text-2xl font-semibold text-gray-900">${msg.name}</h3>
+                        <p class="text-blue-600 font-medium mb-4">${msg.role}</p>
+                        <p class="text-gray-600 leading-relaxed">"${msg.message}"</p>
+                    </div>`;
+            });
+            container.innerHTML = messagesHTML;
+        }
 
-        // Admin Logout
-        logoutButtonEl.addEventListener('click', async () => {
-            try {
-                await signOut(auth);
-            } catch (error) {
-                console.error("Logout error:", error);
-            }
-        });
+        function renderVisionMission(vmData) {
+            const container = document.getElementById('vision-mission-container');
+            let vmHTML = '';
+            vmData.forEach((item, index) => {
+                vmHTML += `
+                    <div class="p-10 bg-white rounded-3xl card flex flex-col items-center text-center slide-up" style="animation-delay: ${index * 0.2 + 0.1}s;">
+                        <img src="${item.imageUrl}" alt="${item.title} Image" class="w-full h-72 object-cover rounded-2xl mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-4">${item.title}</h3>
+                        <p class="text-gray-600 leading-relaxed">${item.text}</p>
+                    </div>`;
+            });
+            container.innerHTML = vmHTML;
+        }
+        
+        function renderFeatures(featuresData) {
+            const container = document.getElementById('features-container');
+            let featuresHTML = '';
+            featuresData.forEach((feature, index) => {
+                featuresHTML += `
+                    <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: ${index * 0.1}s;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${feature.iconSvgPath}" />
+                        </svg>
+                        <p class="text-gray-800 font-medium">${feature.featureText}</p>
+                    </div>`;
+            });
+            container.innerHTML = featuresHTML;
+        }
 
-        // Firestore paths
-        const getWebsiteContentDocPath = () => doc(db, `/artifacts/${appId}/public/data/website_content/main`);
-        const getNoticesCollectionPath = () => collection(db, `/artifacts/${appId}/public/data/notices`);
-        const getContactMessagesCollectionPath = () => collection(db, `/artifacts/${appId}/public/data/contact_messages`);
-        const getFeaturesCollectionPath = () => collection(db, `/artifacts/${appId}/public/data/features`);
+        function renderStats(statsData) {
+            const container = document.getElementById('stats-container');
+            let statsHTML = '';
+            statsData.forEach(stat => {
+                statsHTML += `
+                    <div class="p-10 bg-white/10 rounded-3xl card backdrop-blur-md">
+                        <div class="text-6xl md:text-8xl font-extrabold mb-4">${stat.statNumber}</div>
+                        <h3 class="text-xl font-semibold mb-2">${stat.statTitle}</h3>
+                        <p class="text-gray-200">${stat.statDescription}</p>
+                    </div>`;
+            });
+            container.innerHTML = statsHTML;
+        }
 
-        // Fetch and display website content
-        function fetchWebsiteContent() {
-            const contentDocRef = getWebsiteContentDocPath();
-            onSnapshot(contentDocRef, (docSnap) => {
-                const defaultContent = {
-                    intro: "Rafi University stands as a beacon of academic excellence and holistic development. Our commitment is to foster a dynamic learning environment where students can thrive, innovate, and lead. We believe in providing a comprehensive education that goes beyond textbooks, preparing our students to be compassionate, responsible, and globally-minded citizens. Our dedicated faculty, state-of-the-art facilities, and vibrant campus life create the perfect ecosystem for intellectual growth and personal enrichment.",
-                    principalMessage: "\"Education is not just about acquiring knowledge, but about shaping character and building a foundation for a lifetime of learning. We are dedicated to nurturing every student's potential and preparing them to face the challenges of tomorrow with confidence and integrity.\"",
-                    directorMessage: "\"Our vision is to empower students to become leaders who are not only academically brilliant but also socially responsible. We aim to instill a global perspective while staying true to our cultural roots, ensuring our students are well-rounded and ready to make a positive impact on the world.\"",
-                    vision: "We aspire to develop socially conscious citizens of tomorrow who will provide leadership in all walks of life.",
-                    mission: "Shaping Indian souls with a Global vision.",
-                    totalStudents: "550",
-                    passoutStudents: "36"
-                };
+        function renderContact(contactData) {
+            const email1 = document.getElementById('contact-email1');
+            email1.href = `mailto:${contactData.email1}`;
+            email1.textContent = contactData.email1;
 
-                const data = docSnap.exists() ? docSnap.data() : defaultContent;
+            const email2 = document.getElementById('contact-email2');
+            email2.href = `mailto:${contactData.email2}`;
+            email2.textContent = contactData.email2;
+
+            const phone = document.getElementById('contact-phone');
+            phone.href = `tel:${contactData.phone}`;
+            phone.textContent = contactData.phone;
+        }
+
+        // --- UI Interactivity ---
+
+        function setupMobileMenu() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+            });
+        }
+
+        function setupCarousel(heroData) {
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const heroTitle = document.getElementById('hero-title');
+            const heroButton = document.getElementById('hero-button');
+            let currentIndex = 0;
+
+            function showNextItem() {
+                // Fade out current item
+                carouselItems[currentIndex].classList.remove('active');
                 
-                introTextEl.textContent = data.intro;
-                principalMessageEl.textContent = data.principalMessage;
-                directorMessageEl.textContent = data.directorMessage;
-                visionTextEl.textContent = data.vision;
-                missionTextEl.textContent = data.mission;
-                totalStudentsEl.textContent = (data.totalStudents || "0") + "+";
-                totalStudentsTextEl.textContent = `Rafi University started with 105 students and at present, we have more than ${data.totalStudents || "0"} students.`;
-                passoutStudentsEl.textContent = data.passoutStudents || "0";
-                passoutStudentsTextEl.textContent = `In the past three years, ${data.passoutStudents || "0"} students have successfully passed out from the 10th grade at Rafi University.`;
+                // Update index
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+
+                // Update text and button to match next slide
+                const nextSlideData = heroData[currentIndex];
+                heroTitle.textContent = nextSlideData.title;
+                heroButton.textContent = nextSlideData.buttonText;
+                heroButton.href = nextSlideData.buttonLink;
                 
-                // Populate admin form
-                websiteContentFormEl['update-intro'].value = data.intro;
-                websiteContentFormEl['update-principal'].value = data.principalMessage;
-                websiteContentFormEl['update-director'].value = data.directorMessage;
-                websiteContentFormEl['update-vision'].value = data.vision;
-                websiteContentFormEl['update-mission'].value = data.mission;
-                websiteContentFormEl['update-total-students'].value = data.totalStudents;
-                websiteContentFormEl['update-passout-students'].value = data.passoutStudents;
+                // Fade in next item
+                carouselItems[currentIndex].classList.add('active');
+            }
 
-            }, (error) => {
-                console.error("Error fetching website content:", error);
-            });
+            setInterval(showNextItem, 5000); // Change image every 5 seconds
         }
 
-        // Update website content from admin panel
-        websiteContentFormEl.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const contentDocRef = getWebsiteContentDocPath();
-            try {
-                await setDoc(contentDocRef, {
-                    intro: websiteContentFormEl['update-intro'].value,
-                    principalMessage: websiteContentFormEl['update-principal'].value,
-                    directorMessage: websiteContentFormEl['update-director'].value,
-                    vision: websiteContentFormEl['update-vision'].value,
-                    mission: websiteContentFormEl['update-mission'].value,
-                    totalStudents: websiteContentFormEl['update-total-students'].value,
-                    passoutStudents: websiteContentFormEl['update-passout-students'].value,
-                    updatedAt: new Date()
-                }, { merge: true });
-                showModal("Website content updated successfully!");
-            } catch (e) {
-                console.error("Error updating website content:", e);
-                showModal("Failed to update website content. Please try again.");
-            }
-        });
+        function setupAnimations() {
+            const animatedElements = document.querySelectorAll('.slide-up, .fade-in');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
 
-        // Fetch and display notices
-        function fetchNotices() {
-            const noticesCollectionRef = getNoticesCollectionPath();
-            const q = query(noticesCollectionRef, orderBy("createdAt", "desc"));
-            
-            onSnapshot(q, (querySnapshot) => {
-                noticesLoadingEl.classList.add('hidden');
-                noticesListEl.innerHTML = '';
-                noticesListAdminEl.innerHTML = '';
-                if (querySnapshot.empty) {
-                    noticesListEl.innerHTML = '<p class="text-gray-500 text-center">No notices at the moment.</p>';
-                    noticesListAdminEl.innerHTML = '<p class="text-gray-500 text-center">No notices at the moment.</p>';
-                }
-                querySnapshot.forEach((doc) => {
-                    const notice = doc.data();
-                    const noticeId = doc.id;
-                    const date = new Date(notice.createdAt.seconds * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                    
-                    // Public list
-                    noticesListEl.innerHTML += `
-                        <li class="p-6 bg-blue-50 rounded-xl card transition-transform">
-                            <h4 class="text-xl font-semibold text-blue-800 mb-2">${notice.title}</h4>
-                            <p class="text-gray-600 mb-2">${notice.body}</p>
-                            <span class="text-sm text-gray-500">Published on ${date}</span>
-                        </li>
-                    `;
-
-                    // Admin list
-                    const adminNoticeItem = document.createElement('div');
-                    adminNoticeItem.classList.add('bg-white', 'p-4', 'rounded-lg', 'border', 'border-gray-200', 'flex', 'items-center', 'justify-between', 'shadow-sm');
-                    adminNoticeItem.innerHTML = `
-                        <div>
-                            <h5 class="font-semibold text-gray-900">${notice.title}</h5>
-                            <p class="text-sm text-gray-600">${notice.body.substring(0, 50)}...</p>
-                        </div>
-                        <button data-id="${noticeId}" class="delete-notice-btn py-1 px-4 rounded-full bg-red-500 text-white text-sm hover:bg-red-600">Delete</button>
-                    `;
-                    noticesListAdminEl.appendChild(adminNoticeItem);
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
                 });
+            }, observerOptions);
 
-                // Attach event listeners to delete buttons
-                document.querySelectorAll('.delete-notice-btn').forEach(button => {
-                    button.addEventListener('click', async (e) => {
-                        const noticeId = e.target.getAttribute('data-id');
-                        const noticeDocRef = doc(db, `/artifacts/${appId}/public/data/notices/${noticeId}`);
-                        try {
-                            await deleteDoc(noticeDocRef);
-                            showModal("Notice deleted successfully.");
-                        } catch (error) {
-                            console.error("Error deleting notice:", error);
-                            showModal("Failed to delete notice. Please try again.");
-                        }
-                    });
-                });
-
-            }, (error) => {
-                console.error("Error fetching notices:", error);
-                noticesLoadingEl.textContent = 'Failed to load notices.';
+            animatedElements.forEach(element => {
+                observer.observe(element);
             });
         }
-
-        // Add new notice from admin panel
-        addNoticeFormEl.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const title = addNoticeFormEl['notice-title'].value;
-            const body = addNoticeFormEl['notice-body'].value;
-            const noticesCollectionRef = getNoticesCollectionPath();
-            
-            try {
-                await addDoc(noticesCollectionRef, {
-                    title,
-                    body,
-                    createdAt: new Date(),
-                    userId: auth.currentUser.uid
-                });
-                addNoticeFormEl.reset();
-                showModal("New notice added successfully!");
-            } catch (e) {
-                console.error("Error adding notice:", e);
-                showModal("Failed to add new notice. Please try again.");
-            }
-        });
-        
-        // Handle contact form submission
-        contactFormEl.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const contactName = contactFormEl['contact-name'].value;
-            const contactEmail = contactFormEl['contact-email'].value;
-            const contactMessage = contactFormEl['contact-message'].value;
-            
-            const messagesCollectionRef = getContactMessagesCollectionPath();
-            
-            try {
-                await addDoc(messagesCollectionRef, {
-                    name: contactName,
-                    email: contactEmail,
-                    message: contactMessage,
-                    createdAt: new Date()
-                });
-                contactFormEl.reset();
-                showModal("Your message has been sent successfully!");
-            } catch (e) {
-                console.error("Error sending contact message:", e);
-                showModal("Failed to send message. Please try again.");
-            }
-        });
-        
-        // Fetch and display contact messages in admin panel
-        async function fetchContactMessages() {
-            const messagesCollectionRef = getContactMessagesCollectionPath();
-            const q = query(messagesCollectionRef, orderBy("createdAt", "desc"));
-            
-            onSnapshot(q, (querySnapshot) => {
-                messagesListAdminEl.innerHTML = '';
-                if (querySnapshot.empty) {
-                    messagesListAdminEl.innerHTML = '<p class="text-gray-500 text-center">No contact messages received.</p>';
-                } else {
-                    querySnapshot.forEach((doc) => {
-                        const message = doc.data();
-                        const date = new Date(message.createdAt.seconds * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-                        messagesListAdminEl.innerHTML += `
-                            <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-                                <p class="text-gray-900 font-semibold">${message.name} <span class="text-sm font-normal text-gray-500">(${message.email})</span></p>
-                                <p class="text-gray-700 mt-2">${message.message}</p>
-                                <p class="text-xs text-gray-400 mt-2">Received on: ${date}</p>
-                            </div>
-                        `;
-                    });
-                }
-            }, (error) => {
-                console.error("Error fetching contact messages:", error);
-                messagesListAdminEl.innerHTML = '<p class="text-red-500 text-center">Failed to load messages.</p>';
-            });
-        }
-
-        // Fetch and display features
-        function fetchFeatures() {
-            const featuresCollectionRef = getFeaturesCollectionPath();
-            const q = query(featuresCollectionRef, orderBy("createdAt"));
-            
-            onSnapshot(q, (querySnapshot) => {
-                featuresContainerEl.innerHTML = '';
-                featuresListAdminEl.innerHTML = '';
-                if (querySnapshot.empty) {
-                    featuresContainerEl.innerHTML = '<p id="features-loading" class="text-center text-gray-500 col-span-full">No features to display.</p>';
-                    featuresListAdminEl.innerHTML = '<p class="text-gray-500 text-center">No features added yet.</p>';
-                } else {
-                    querySnapshot.forEach((doc) => {
-                        const feature = doc.data();
-                        const featureId = doc.id;
-                        
-                        // Public list
-                        featuresContainerEl.innerHTML += `
-                            <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up">
-                                ${feature.svg}
-                                <p class="text-gray-800 font-medium">${feature.text}</p>
-                            </div>
-                        `;
-
-                        // Admin list
-                        const adminFeatureItem = document.createElement('div');
-                        adminFeatureItem.classList.add('bg-white', 'p-4', 'rounded-lg', 'border', 'border-gray-200', 'flex', 'items-center', 'justify-between', 'shadow-sm');
-                        adminFeatureItem.innerHTML = `
-                            <div class="flex items-center space-x-4">
-                                ${feature.svg}
-                                <p class="font-semibold text-gray-900">${feature.text}</p>
-                            </div>
-                            <button data-id="${featureId}" class="delete-feature-btn py-1 px-4 rounded-full bg-red-500 text-white text-sm hover:bg-red-600">Delete</button>
-                        `;
-                        featuresListAdminEl.appendChild(adminFeatureItem);
-                    });
-
-                    // Attach event listeners to delete buttons
-                    document.querySelectorAll('.delete-feature-btn').forEach(button => {
-                        button.addEventListener('click', async (e) => {
-                            const featureId = e.target.getAttribute('data-id');
-                            const featureDocRef = doc(db, `/artifacts/${appId}/public/data/features/${featureId}`);
-                            try {
-                                await deleteDoc(featureDocRef);
-                                showModal("Feature deleted successfully.");
-                            } catch (error) {
-                                console.error("Error deleting feature:", error);
-                                showModal("Failed to delete feature. Please try again.");
-                            }
-                        });
-                    });
-                }
-            }, (error) => {
-                console.error("Error fetching features:", error);
-                featuresContainerEl.innerHTML = '<p class="text-red-500 text-center col-span-full">Failed to load features.</p>';
-                featuresListAdminEl.innerHTML = '<p class="text-red-500 text-center">Failed to load features.</p>';
-            });
-        }
-        
-        // Add new feature from admin panel
-        addFeatureFormEl.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const text = addFeatureFormEl['feature-text'].value;
-            const svg = addFeatureFormEl['feature-svg'].value;
-            const featuresCollectionRef = getFeaturesCollectionPath();
-            
-            try {
-                await addDoc(featuresCollectionRef, {
-                    text,
-                    svg,
-                    createdAt: new Date(),
-                    userId: auth.currentUser.uid
-                });
-                addFeatureFormEl.reset();
-                showModal("New feature added successfully!");
-            } catch (e) {
-                console.error("Error adding feature:", e);
-                showModal("Failed to add new feature. Please try again.");
-            }
-        });
-
     </script>
 </body>
 </html>
