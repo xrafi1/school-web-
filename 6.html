@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice Board</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900">Company Notice Board</h1>
+            <p class="text-slate-500 mt-2">Latest updates and announcements.</p>
+        </header>
+
+        <!-- Loading Spinner -->
+        <div id="loader" class="flex justify-center items-center h-64">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-slate-900"></div>
+        </div>
+        
+        <!-- Error Message -->
+        <div id="error-message" class="hidden text-center bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">Could not fetch notices. Please check the Apps Script URL and your Google Sheet setup.</span>
+        </div>
+
+        <!-- Notice Board Grid -->
+        <div id="notice-board" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Notice cards will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // !!! IMPORTANT !!!
+            // PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+            const appsScriptUrl = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+            const noticeBoard = document.getElementById('notice-board');
+            const loader = document.getElementById('loader');
+            const errorMessage = document.getElementById('error-message');
+
+            if (!appsScriptUrl || appsScriptUrl === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                loader.classList.add('hidden');
+                errorMessage.classList.remove('hidden');
+                errorMessage.querySelector('span').textContent = 'https://script.google.com/macros/s/AKfycbyeRllcM1mwSXZB43pZ5hS3SllOQ7kBftnl-q66hzJMIzi1uidQutEyW1DBlLt6Pamm/exec';
+                return;
+            }
+
+            // Function to format date into a more readable format
+            function formatDate(dateString) {
+                if (!dateString) return 'No Date';
+                try {
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    return new Date(dateString).toLocaleDateString(undefined, options);
+                } catch (e) {
+                    return dateString; // Fallback to original string if date is invalid
+                }
+            }
+
+            // Function to fetch notices from Google Sheets via Apps Script
+            async function fetchNotices() {
+                try {
+                    const response = await fetch(appsScriptUrl);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+
+                    // Hide loader and show notice board
+                    loader.classList.add('hidden');
+                    noticeBoard.classList.remove('hidden');
+
+                    if (data.length === 0) {
+                        noticeBoard.innerHTML = `<p class="text-slate-500 col-span-full text-center">No notices found.</p>`;
+                        return;
+                    }
+
+                    // Clear any existing notices
+                    noticeBoard.innerHTML = '';
+
+                    // Create a card for each notice
+                    data.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'bg-white rounded-lg shadow-md p-6 flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300';
+                        
+                        // Sanitize inputs to prevent XSS, just in case
+                        const title = item.title ? String(item.title) : 'Untitled';
+                        const description = item.description ? String(item.description) : 'No description provided.';
+                        const date = formatDate(item.date);
+
+                        card.innerHTML = `
+                            <div class="flex-grow">
+                                <h2 class="text-xl font-bold mb-2 text-slate-900">${title}</h2>
+                                <p class="text-slate-600 leading-relaxed">${description}</p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-slate-200">
+                                <p class="text-sm text-slate-500 font-medium">Posted on: ${date}</p>
+                            </div>
+                        `;
+                        noticeBoard.appendChild(card);
+                    });
+
+                } catch (error) {
+                    console.error('Failed to fetch notices:', error);
+                    loader.classList.add('hidden');
+                    errorMessage.classList.remove('hidden');
+                }
+            }
+
+            fetchNotices();
+        });
+    </script>
+
+</body>
+</html>
