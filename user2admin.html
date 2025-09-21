@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafi University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-blue: #1f3d7a;
+            --accent-blue: #5a8bf7;
+            --light-bg: #f5f7f9;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: #1a202c;
+        }
+
+        .carousel-item {
+            opacity: 0;
+            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .carousel-item.active {
+            opacity: 1;
+        }
+
+        .slide-up {
+            animation: slideUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            opacity: 0;
+            transform: translateY(60px);
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Responsive Hero Text */
+        #hero .hero-text {
+            font-size: 2.5rem;
+            line-height: 1.2;
+        }
+        @media (min-width: 768px) {
+            #hero .hero-text {
+                font-size: 5rem;
+                line-height: 1.1;
+            }
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-xl p-4 md:p-6">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <img src="https://i.ibb.co/r2tP3wzb/Blue-Modern-Initials-Letter-A-University-Logo.png" alt="Rafi University Logo" class="h-12 w-12 rounded-full shadow-lg">
+                <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Rafi University</h1>
+            </div>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 text-lg font-medium text-gray-700">
+                <a href="#intro" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="#messages" class="hover:text-blue-600 transition-colors">Messages</a>
+                <a href="#vision" class="hover:text-blue-600 transition-colors">Our Vision</a>
+                <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+                <a href="#numbers" class="hover:text-blue-600 transition-colors">Statistics</a>
+                <a href="#notice-board" class="hover:text-blue-600 transition-colors">Notice Board</a>
+                <a href="#admissions" class="hover:text-blue-600 transition-colors">Admissions</a>
+                <a href="#contact" class="hover:text-blue-600 transition-colors">Contact Us</a>
+                <a href="#admin-panel" class="hover:text-blue-600 transition-colors">Admin Panel</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Menu (hidden by default) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-6 transition-all duration-300 ease-in-out">
+        <nav class="flex flex-col items-center space-y-6 text-lg font-medium text-gray-700">
+            <a href="#intro" class="hover:text-blue-600 transition-colors">About Us</a>
+            <a href="#messages" class="hover:text-blue-600 transition-colors">Messages</a>
+            <a href="#vision" class="hover:text-blue-600 transition-colors">Our Vision</a>
+            <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+            <a href="#numbers" class="hover:text-blue-600 transition-colors">Statistics</a>
+            <a href="#notice-board" class="hover:text-blue-600 transition-colors">Notice Board</a>
+            <a href="#admissions" class="hover:text-blue-600 transition-colors">Admissions</a>
+            <a href="#contact" class="hover:text-blue-600 transition-colors">Contact Us</a>
+            <a href="#admin-panel" class="hover:text-blue-600 transition-colors">Admin Panel</a>
+        </nav>
+    </div>
+
+    <!-- Banner Carousel -->
+    <section id="hero" class="relative w-full overflow-hidden h-[65vh] md:h-[85vh] bg-gray-900">
+        <div class="carousel-container absolute inset-0">
+            <div class="carousel-item active absolute inset-0">
+                <img src="https://i.ibb.co/mFcNS7mW/pexels-joseph-fuller-3673812-5611707.jpg" alt="University Campus" class="w-full h-full object-cover opacity-80">
+            </div>
+            <div class="carousel-item absolute inset-0">
+                <img src="https://i.ibb.co/n8tBWSBC/pexels-gryziu-31207005.jpg" alt="Graduation Ceremony" class="w-full h-full object-cover opacity-80">
+            </div>
+            <div class="carousel-item absolute inset-0">
+                <img src="https://i.ibb.co/KjjmGSKY/pexels-einfoto-2350925.jpg" alt="Students in Classroom" class="w-full h-full object-cover opacity-80">
+            </div>
+            <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 text-center">
+                <div class="space-y-6">
+                    <h2 class="hero-text font-extrabold tracking-tight text-white slide-up">
+                        Welcome to Rafi University
+                    </h2>
+                    <a href="#intro" class="inline-block px-12 py-4 rounded-full text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors transform hover:scale-105 slide-up" style="animation-delay: 0.5s;">
+                        Discover More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-20 space-y-32">
+
+        <!-- Introduction Section -->
+        <section id="intro" class="flex flex-col lg:flex-row-reverse items-center gap-16">
+            <div class="lg:w-1/2 slide-up">
+                <img src="https://i.ibb.co/VpDq0zyw/pexels-gu-bra-11680150-6477521.jpg" alt="Introduction Image" class="w-full h-full object-cover rounded-[2rem] shadow-2xl">
+            </div>
+            <div class="lg:w-1/2 slide-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">About Our Commitment to Excellence</h2>
+                <p id="intro-text" class="text-gray-700 leading-relaxed text-lg">
+                    Rafi University stands as a beacon of academic excellence and holistic development. Our commitment is to foster a dynamic learning environment where students can thrive, innovate, and lead. We believe in providing a comprehensive education that goes beyond textbooks, preparing our students to be compassionate, responsible, and globally-minded citizens. Our dedicated faculty, state-of-the-art facilities, and vibrant campus life create the perfect ecosystem for intellectual growth and personal enrichment.
+                </p>
+            </div>
+        </section>
+
+        <!-- Principal & Director's Messages -->
+        <section id="messages" class="space-y-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Messages from Our Leadership</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Principal's Message -->
+                <div class="card p-10 bg-white rounded-3xl text-center flex flex-col items-center slide-up" style="animation-delay: 0.1s;">
+                    <img src="https://i.ibb.co/pBQyBZy4/2859-c78201580cd5d165bdf0cf9d0301d85c-8-9-2025-2-11-12-pm.jpg" alt="Principal Rafi Sheikh" class="w-44 h-44 md:w-56 md:h-56 rounded-full mb-6 object-cover border-4 border-blue-400">
+                    <h3 class="text-2xl font-semibold text-gray-900">Rafi Sheikh</h3>
+                    <p class="text-blue-600 font-medium mb-4">Principal</p>
+                    <p id="principal-message" class="text-gray-600 leading-relaxed">
+                        "Education is not just about acquiring knowledge, but about shaping character and building a foundation for a lifetime of learning. We are dedicated to nurturing every student's potential and preparing them to face the challenges of tomorrow with confidence and integrity."
+                    </p>
+                </div>
+                <!-- Director's Message -->
+                <div class="card p-10 bg-white rounded-3xl text-center flex flex-col items-center slide-up" style="animation-delay: 0.3s;">
+                    <img src="https://i.ibb.co/rfk0ZhFW/3915-07adb0df0eec8eb5793f7a0669c4a78a-11-9-2025-1-18-14-am.jpg" alt="Director Rafi Sheikh" class="w-44 h-44 md:w-56 md:h-56 rounded-full mb-6 object-cover border-4 border-blue-400">
+                    <h3 class="text-2xl font-semibold text-gray-900">Rafi Sheikh</h3>
+                    <p class="text-blue-600 font-medium mb-4">Director</p>
+                    <p id="director-message" class="text-gray-600 leading-relaxed">
+                        "Our vision is to empower students to become leaders who are not only academically brilliant but also socially responsible. We aim to instill a global perspective while staying true to our cultural roots, ensuring our students are well-rounded and ready to make a positive impact on the world."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision & Mission Section -->
+        <section id="vision" class="space-y-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Our Vision & Mission</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Our Vision -->
+                <div class="p-10 bg-white rounded-3xl card flex flex-col items-center text-center slide-up" style="animation-delay: 0.1s;">
+                    <img src="https://i.ibb.co/ZvpmPB9/pexels-pixabay-159775.jpg" alt="Vision Image" class="w-full h-72 object-cover rounded-2xl mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision</h3>
+                    <p id="vision-text" class="text-gray-600 leading-relaxed">
+                        We aspire to develop socially conscious citizens of tomorrow who will provide leadership in all walks of life.
+                    </p>
+                </div>
+                <!-- Our Mission -->
+                <div class="p-10 bg-white rounded-3xl card flex flex-col items-center text-center slide-up" style="animation-delay: 0.3s;">
+                    <img src="https://i.ibb.co/Y49wBz3P/pexels-pavel-danilyuk-7944238.jpg" alt="Mission Image" class="w-full h-72 object-cover rounded-2xl mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Mission</h3>
+                    <p id="mission-text" class="text-gray-600 leading-relaxed">
+                        Shaping Indian souls with a Global vision.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Features Section -->
+        <section id="features" class="space-y-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Our Special Features</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Card Template -->
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.1s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M12 20.057a4 4 0 001.03-.224l-.004-.001m-2.056.225a4 4 0 011.026 0l-.004.001zM15 16l-3-3l-3 3M12 13V4m0 9v-9m0 9a4 4 0 110-5.292" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Qualified and experienced teachers.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.2s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 4.04A11.955 11.955 0 00.382 12a11.955 11.955 0 008.618 4.04A11.955 11.955 0 0112 21.056a11.955 11.955 0 018.618-4.04 11.955 11.955 0 00-8.618-10.012z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Disciplined and quality education.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Value-based education.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.4s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L18 10l-4-4l-8.25 7.5L6 17z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Audio-visual classes.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.5s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Communicative approaches to language teaching.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.6s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5C12 5.67 11.33 5 10.5 5H6C4.89 5 4 5.89 4 7v10c0 1.11 0.89 2 2 2h4.5c0.83 0 1.5-0.67 1.5-1.5V6.5zM12 6.5C12 5.67 11.33 5 10.5 5h-4.5" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Conceptual development through various teaching material aids.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.7s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17.25V21h3v-3h3v3h3v-3H9zM19 14V3h-2v11h2zM7 14v7H5v-7h2z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Well-equipped science and computer lab.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.8s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0-2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM12 15c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Spacious and airy classrooms.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 0.9s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 119.21 3.99a9 9 0 0011.79 8.8z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Excellent arrangement for extra co-curricular activities.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 1.0s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM12 2a10 10 0 100 20 10 10 0 000-20z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Opportunity for personality development.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 1.1s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 11h-4V7a4 4 0 00-8 0v4H1a1 1 0 00-1 1v6a1 1 0 001 1h4v4a1 1 0 001 1h6a1 1 0 001-1v-4h4a1 1 0 001-1v-6a1 1 0 00-1-1z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Encouragement towards innovative ideas.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 1.2s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">All-round development of children.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 1.3s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h-2m-2 0h2m-2 0V8m0 2v2m-2-2h2m0-2h-2m0 2h2" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">To make the children aware and proud of their rich cultural heritage.</p>
+                </div>
+                <div class="bg-blue-50 p-8 rounded-2xl card flex items-start space-x-4 slide-up" style="animation-delay: 1.4s;">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                    </svg>
+                    <p class="text-gray-800 font-medium">Making the child a good and useful citizen to build a stronger nation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Numbers Speak Section -->
+        <section id="numbers" class="space-y-16 text-center py-24 px-4 bg-[var(--primary-blue)] rounded-[3rem] text-white slide-up">
+            <h2 class="text-4xl md:text-5xl font-bold mb-8 tracking-wide">Our Numbers Speak</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Total Students -->
+                <div class="p-10 bg-white/10 rounded-3xl card backdrop-blur-md">
+                    <div class="text-6xl md:text-8xl font-extrabold mb-4">550+</div>
+                    <h3 class="text-xl font-semibold mb-2">Total Students</h3>
+                    <p class="text-gray-200">
+                        Rafi University started with 105 students and at present, we have more than 550 students.
+                    </p>
+                </div>
+                <!-- Passout Students -->
+                <div class="p-10 bg-white/10 rounded-3xl card backdrop-blur-md">
+                    <div class="text-6xl md:text-8xl font-extrabold mb-4">36</div>
+                    <h3 class="text-xl font-semibold mb-2">Passout Students</h3>
+                    <p class="text-gray-200">
+                        In the past three years, 36 students have successfully passed out from the 10th grade at Rafi University.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Notice Board Section -->
+        <section id="notice-board" class="space-y-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Notice Board</h2>
+            <div id="notices-container" class="bg-white p-4 sm:p-6 md:p-10 rounded-3xl card slide-up">
+                <!-- Notices will be dynamically added here -->
+                <p id="notices-loading" class="text-center text-gray-500">Loading notices...</p>
+                <ul id="notices-list" class="space-y-4"></ul>
+            </div>
+        </section>
+
+        <!-- Admission Form Section -->
+        <section id="admissions" class="space-y-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Apply for Admission</h2>
+            <div class="bg-white p-4 sm:p-6 md:p-10 rounded-3xl card slide-up" style="animation-delay: 0.2s;">
+                <iframe src="https://script.google.com/macros/s/AKfycbyuZPSSGDsLppaxlobKGTY1GV6YzQ3B173jjtcHTHfqEM234XBroVcFi68FH7d8WO6a/exec" class="w-full h-[80vh] md:h-[100vh]" frameborder="0">Loading...</iframe>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section id="contact" class="fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12 slide-up">Contact Us</h2>
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Contact Information -->
+                <div class="bg-white p-10 rounded-3xl card flex flex-col justify-center slide-up" style="animation-delay: 0.1s;">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Get in Touch</h3>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                        We are happy to answer any questions you may have. Feel free to reach out to us through the form or using the contact details below.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <a href="mailto:Help@RafiUniversity.com" class="hover:text-blue-600 transition-colors">Help@RafiUniversity.com</a>
+                        </div>
+                        <div class="flex items-center space-x-4 text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <a href="mailto:Info@RafiUniversity.com" class="hover:text-blue-600 transition-colors">Info@RafiUniversity.com</a>
+                        </div>
+                        <div class="flex items-center space-x-4 text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[var(--accent-blue)] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.5l1.5 4.5h4l1.5-4.5H19a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11a4 4 0 100-8 4 4 0 000 8z" />
+                            </svg>
+                            <a href="tel:8876001303" class="hover:text-blue-600 transition-colors">8876001303</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white p-10 rounded-3xl card slide-up" style="animation-delay: 0.3s;">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Send Us a Message</h3>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="contact-name" class="block text-gray-700 font-medium mb-2">Name</label>
+                            <input type="text" id="contact-name" name="name" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="contact-email" name="email" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Email" required>
+                        </div>
+                        <div>
+                            <label for="contact-message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="contact-message" name="message" rows="5" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 px-8 rounded-full bg-[var(--primary-blue)] text-white font-semibold hover:bg-blue-800 transition-colors transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Panel Section -->
+        <section id="admin-panel" class="space-y-16">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-gray-800 slide-up">Admin Panel</h2>
+            <div id="admin-content" class="bg-white p-4 sm:p-6 md:p-10 rounded-3xl card slide-up flex flex-col items-center">
+                <!-- Auth state will determine what is shown here -->
+                <div id="login-section" class="w-full max-w-lg space-y-6 text-center">
+                    <h3 class="text-2xl font-semibold text-gray-900">Admin Login</h3>
+                    <form id="login-form" class="space-y-4">
+                        <input type="email" id="admin-email" placeholder="Email" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" required>
+                        <input type="password" id="admin-password" placeholder="Password" class="w-full p-4 rounded-lg border-2 border-gray-300 focus:outline-none focus:border-[var(--accent-blue)] transition-colors" required>
+                        <button type="submit" class="w-full py-4 px-8 rounded-full bg-[var(--primary-blue)] text-white font-semibold hover:bg-blue-800 transition-colors transform hover:scale-105">
+                            Log In
+                        </button>
+                        <p id="login-error" class="text-red-500 text-sm hidden"></p>
+                    </form>
+                </div>
+
+                <div id="admin-dashboard" class="w-full max-w-3xl space-y-12 hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-semibold text-gray-900">Dashboard</h3>
+                        <button id="logout-button" class="py-2 px-6 rounded-full bg-red-500 text-white font-semibold hover:bg-red-600 transition-colors">
+                            Log Out
+                        </button>
+                    </div>
+
+                    <!-- Manage Website Content -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Update Website Content</h4>
+                        <form id="website-content-form" class="space-y-4 p-6 bg-gray-100 rounded-lg">
+                            <div>
+                                <label for="update-intro" class="block text-gray-700 font-medium mb-2">About Us</label>
+                                <textarea id="update-intro" rows="5" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
+                            </div>
+                            <div>
+                                <label for="update-principal" class="block text-gray-700 font-medium mb-2">Principal's Message</label>
+                                <textarea id="update-principal" rows="5" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
+                            </div>
+                            <div>
+                                <label for="update-director" class="block text-gray-700 font-medium mb-2">Director's Message</label>
+                                <textarea id="update-director" rows="5" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
+                            </div>
+                            <div>
+                                <label for="update-vision" class="block text-gray-700 font-medium mb-2">Our Vision</label>
+                                <textarea id="update-vision" rows="3" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
+                            </div>
+                            <div>
+                                <label for="update-mission" class="block text-gray-700 font-medium mb-2">Our Mission</label>
+                                <textarea id="update-mission" rows="3" class="w-full p-3 rounded-lg border border-gray-300"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 px-6 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
+                                Update Content
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Manage Notices -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Manage Notices</h4>
+                        <form id="add-notice-form" class="space-y-4 p-6 bg-gray-100 rounded-lg">
+                            <div>
+                                <label for="notice-title" class="block text-gray-700 font-medium mb-2">Notice Title</label>
+                                <input type="text" id="notice-title" class="w-full p-3 rounded-lg border border-gray-300" required>
+                            </div>
+                            <div>
+                                <label for="notice-body" class="block text-gray-700 font-medium mb-2">Notice Content</label>
+                                <textarea id="notice-body" rows="3" class="w-full p-3 rounded-lg border border-gray-300" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 px-6 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
+                                Add New Notice
+                            </button>
+                        </form>
+                        
+                        <div id="notices-list-admin" class="mt-8 space-y-4">
+                            <!-- Notices will be managed here -->
+                            <p class="text-gray-500 text-center">Loading notices...</p>
+                        </div>
+                    </div>
+
+                    <!-- View Contact Messages -->
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-4">Contact Messages</h4>
+                        <div id="messages-list-admin" class="space-y-4 p-6 bg-gray-100 rounded-lg">
+                            <p class="text-gray-500 text-center">Loading messages...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="flex justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-green-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3.707 7.293a1 1 0 00-1.414-1.414L10 11.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 000-1.414z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <p id="success-message" class="text-center text-lg font-semibold text-gray-800">
+                Message sent successfully!
+            </p>
+            <div class="flex justify-center mt-6">
+                <button id="close-modal" class="py-2 px-6 rounded-full bg-blue-600 text-white font-semibold">OK</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white p-10 mt-16 text-center rounded-t-[3rem]">
+        <p>&copy; 2025 Rafi University. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, collection, query, addDoc, deleteDoc, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+        setLogLevel('debug');
+
+        // Global variables provided by the environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "AIzaSyAheTW0W5gtD8QtjErCoA5KnqsUdmFOn1Q",
+            authDomain: "rafi-aa3f7.firebaseapp.com",
+            projectId: "rafi-aa3f7",
+            storageBucket: "rafi-aa3f7.firebasestorage.app",
+            messagingSenderId: "304081068184",
+            appId: "1:304081068184:web:a7aae4eb4c69707faa30ed",
+            measurementId: "G-3WJ3G1BVRJ"
+        };
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let userId = null;
+
+        // DOM Elements
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        const animatedElements = document.querySelectorAll('.slide-up, .fade-in');
+        const introTextEl = document.getElementById('intro-text');
+        const principalMessageEl = document.getElementById('principal-message');
+        const directorMessageEl = document.getElementById('director-message');
+        const visionTextEl = document.getElementById('vision-text');
+        const missionTextEl = document.getElementById('mission-text');
+        const noticesListEl = document.getElementById('notices-list');
+        const noticesLoadingEl = document.getElementById('notices-loading');
+        const loginSectionEl = document.getElementById('login-section');
+        const adminDashboardEl = document.getElementById('admin-dashboard');
+        const loginFormEl = document.getElementById('login-form');
+        const logoutButtonEl = document.getElementById('logout-button');
+        const loginErrorEl = document.getElementById('login-error');
+        const websiteContentFormEl = document.getElementById('website-content-form');
+        const addNoticeFormEl = document.getElementById('add-notice-form');
+        const noticesListAdminEl = document.getElementById('notices-list-admin');
+        const messagesListAdminEl = document.getElementById('messages-list-admin');
+        const contactFormEl = document.getElementById('contact-form');
+        const successModal = document.getElementById('success-modal');
+        const successMessage = document.getElementById('success-message');
+        const closeModalButton = document.getElementById('close-modal');
+
+        // Modal Functionality
+        function showModal(message) {
+            successMessage.textContent = message;
+            successModal.classList.remove('hidden');
+        }
+
+        function hideModal() {
+            successModal.classList.add('hidden');
+        }
+
+        closeModalButton.addEventListener('click', hideModal);
+
+        // Mobile Menu Toggle
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Carousel functionality
+        let currentIndex = 0;
+        function showNextImage() {
+            carouselItems[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            carouselItems[currentIndex].classList.add('active');
+        }
+        setInterval(showNextImage, 5000); // Change image every 5 seconds
+
+        // Intersection Observer for animations
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        animatedElements.forEach(element => { observer.observe(element); });
+
+        // Firebase Auth State Listener
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+                loginSectionEl.classList.add('hidden');
+                adminDashboardEl.classList.remove('hidden');
+                fetchWebsiteContent();
+                fetchNotices();
+                fetchContactMessages();
+            } else {
+                userId = null;
+                loginSectionEl.classList.remove('hidden');
+                adminDashboardEl.classList.add('hidden');
+            }
+        });
+
+        // Initial Sign-in
+        async function initialAuth() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Initial auth failed:", error);
+            }
+        }
+        initialAuth();
+
+        // Admin Login
+        loginFormEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = loginFormEl['admin-email'].value;
+            const password = loginFormEl['admin-password'].value;
+            loginErrorEl.classList.add('hidden');
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                loginErrorEl.textContent = "Failed to log in. Please check your email and password.";
+                loginErrorEl.classList.remove('hidden');
+                console.error("Login error:", error);
+            }
+        });
+
+        // Admin Logout
+        logoutButtonEl.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+            } catch (error) {
+                console.error("Logout error:", error);
+            }
+        });
+
+        // Firestore paths
+        const getWebsiteContentDocPath = () => doc(db, `/artifacts/${appId}/public/data/website_content/main`);
+        const getNoticesCollectionPath = () => collection(db, `/artifacts/${appId}/public/data/notices`);
+        const getContactMessagesCollectionPath = () => collection(db, `/artifacts/${appId}/public/data/contact_messages`);
+
+        // Fetch and display website content
+        function fetchWebsiteContent() {
+            const contentDocRef = getWebsiteContentDocPath();
+            onSnapshot(contentDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    introTextEl.textContent = data.intro || "Loading...";
+                    principalMessageEl.textContent = data.principalMessage || "Loading...";
+                    directorMessageEl.textContent = data.directorMessage || "Loading...";
+                    visionTextEl.textContent = data.vision || "Loading...";
+                    missionTextEl.textContent = data.mission || "Loading...";
+                    
+                    // Populate admin form
+                    websiteContentFormEl['update-intro'].value = data.intro || '';
+                    websiteContentFormEl['update-principal'].value = data.principalMessage || '';
+                    websiteContentFormEl['update-director'].value = data.directorMessage || '';
+                    websiteContentFormEl['update-vision'].value = data.vision || '';
+                    websiteContentFormEl['update-mission'].value = data.mission || '';
+                } else {
+                    console.log("No such document for website content!");
+                }
+            }, (error) => {
+                console.error("Error fetching website content:", error);
+            });
+        }
+
+        // Update website content from admin panel
+        websiteContentFormEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const contentDocRef = getWebsiteContentDocPath();
+            try {
+                await setDoc(contentDocRef, {
+                    intro: websiteContentFormEl['update-intro'].value,
+                    principalMessage: websiteContentFormEl['update-principal'].value,
+                    directorMessage: websiteContentFormEl['update-director'].value,
+                    vision: websiteContentFormEl['update-vision'].value,
+                    mission: websiteContentFormEl['update-mission'].value,
+                    updatedAt: new Date()
+                }, { merge: true });
+                showModal("Website content updated successfully!");
+            } catch (e) {
+                console.error("Error updating website content:", e);
+                showModal("Failed to update website content. Please try again.");
+            }
+        });
+
+        // Fetch and display notices
+        function fetchNotices() {
+            const noticesCollectionRef = getNoticesCollectionPath();
+            const q = query(noticesCollectionRef, orderBy("createdAt", "desc"));
+            
+            onSnapshot(q, (querySnapshot) => {
+                noticesLoadingEl.classList.add('hidden');
+                noticesListEl.innerHTML = '';
+                noticesListAdminEl.innerHTML = '';
+                if (querySnapshot.empty) {
+                    noticesListEl.innerHTML = '<p class="text-gray-500 text-center">No notices at the moment.</p>';
+                    noticesListAdminEl.innerHTML = '<p class="text-gray-500 text-center">No notices at the moment.</p>';
+                }
+                querySnapshot.forEach((doc) => {
+                    const notice = doc.data();
+                    const noticeId = doc.id;
+                    const date = new Date(notice.createdAt.seconds * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    
+                    // Public list
+                    noticesListEl.innerHTML += `
+                        <li class="p-6 bg-blue-50 rounded-xl card transition-transform">
+                            <h4 class="text-xl font-semibold text-blue-800 mb-2">${notice.title}</h4>
+                            <p class="text-gray-600 mb-2">${notice.body}</p>
+                            <span class="text-sm text-gray-500">Published on ${date}</span>
+                        </li>
+                    `;
+
+                    // Admin list
+                    const adminNoticeItem = document.createElement('div');
+                    adminNoticeItem.classList.add('bg-white', 'p-4', 'rounded-lg', 'border', 'border-gray-200', 'flex', 'items-center', 'justify-between', 'shadow-sm');
+                    adminNoticeItem.innerHTML = `
+                        <div>
+                            <h5 class="font-semibold text-gray-900">${notice.title}</h5>
+                            <p class="text-sm text-gray-600">${notice.body.substring(0, 50)}...</p>
+                        </div>
+                        <button data-id="${noticeId}" class="delete-notice-btn py-1 px-4 rounded-full bg-red-500 text-white text-sm hover:bg-red-600">Delete</button>
+                    `;
+                    noticesListAdminEl.appendChild(adminNoticeItem);
+                });
+
+                // Attach event listeners to delete buttons
+                document.querySelectorAll('.delete-notice-btn').forEach(button => {
+                    button.addEventListener('click', async (e) => {
+                        const noticeId = e.target.getAttribute('data-id');
+                        const noticeDocRef = doc(db, `/artifacts/${appId}/public/data/notices/${noticeId}`);
+                        try {
+                            await deleteDoc(noticeDocRef);
+                            showModal("Notice deleted successfully.");
+                        } catch (error) {
+                            console.error("Error deleting notice:", error);
+                            showModal("Failed to delete notice. Please try again.");
+                        }
+                    });
+                });
+
+            }, (error) => {
+                console.error("Error fetching notices:", error);
+                noticesLoadingEl.textContent = 'Failed to load notices.';
+            });
+        }
+
+        // Add new notice from admin panel
+        addNoticeFormEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = addNoticeFormEl['notice-title'].value;
+            const body = addNoticeFormEl['notice-body'].value;
+            const noticesCollectionRef = getNoticesCollectionPath();
+            
+            try {
+                await addDoc(noticesCollectionRef, {
+                    title,
+                    body,
+                    createdAt: new Date(),
+                    userId: auth.currentUser.uid
+                });
+                addNoticeFormEl.reset();
+                showModal("New notice added successfully!");
+            } catch (e) {
+                console.error("Error adding notice:", e);
+                showModal("Failed to add new notice. Please try again.");
+            }
+        });
+        
+        // Handle contact form submission
+        contactFormEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const contactName = contactFormEl['contact-name'].value;
+            const contactEmail = contactFormEl['contact-email'].value;
+            const contactMessage = contactFormEl['contact-message'].value;
+            
+            const messagesCollectionRef = getContactMessagesCollectionPath();
+            
+            try {
+                await addDoc(messagesCollectionRef, {
+                    name: contactName,
+                    email: contactEmail,
+                    message: contactMessage,
+                    createdAt: new Date()
+                });
+                contactFormEl.reset();
+                showModal("Your message has been sent successfully!");
+            } catch (e) {
+                console.error("Error sending contact message:", e);
+                showModal("Failed to send message. Please try again.");
+            }
+        });
+        
+        // Fetch and display contact messages in admin panel
+        async function fetchContactMessages() {
+            const messagesCollectionRef = getContactMessagesCollectionPath();
+            const q = query(messagesCollectionRef, orderBy("createdAt", "desc"));
+            
+            onSnapshot(q, (querySnapshot) => {
+                messagesListAdminEl.innerHTML = '';
+                if (querySnapshot.empty) {
+                    messagesListAdminEl.innerHTML = '<p class="text-gray-500 text-center">No contact messages received.</p>';
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        const message = doc.data();
+                        const date = new Date(message.createdAt.seconds * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                        messagesListAdminEl.innerHTML += `
+                            <div class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                                <p class="text-gray-900 font-semibold">${message.name} <span class="text-sm font-normal text-gray-500">(${message.email})</span></p>
+                                <p class="text-gray-700 mt-2">${message.message}</p>
+                                <p class="text-xs text-gray-400 mt-2">Received on: ${date}</p>
+                            </div>
+                        `;
+                    });
+                }
+            }, (error) => {
+                console.error("Error fetching contact messages:", error);
+                messagesListAdminEl.innerHTML = '<p class="text-red-500 text-center">Failed to load messages.</p>';
+            });
+        }
+    </script>
+</body>
+</html>
