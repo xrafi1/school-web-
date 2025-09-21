@@ -173,7 +173,7 @@
             <div class="lg:w-1/2 slide-up">
                 <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">About Our Commitment to Excellence</h2>
                 <p id="intro-text" class="text-gray-700 leading-relaxed text-lg">
-                    Rafi University stands as a beacon of academic excellence and holistic development. Our commitment is to foster a dynamic learning environment where students can thrive, innovate, and lead. We believe in providing a comprehensive education that goes beyond textbooks, preparing our students to be compassionate, responsible, and globally-minded citizens. Our dedicated faculty, state-of-the-art facilities, and vibrant campus life create the perfect ecosystem for intellectual growth and personal enrichment.
+                    <!-- Content will be populated by Firestore -->
                 </p>
             </div>
         </section>
@@ -188,7 +188,7 @@
                     <h3 class="text-2xl font-semibold text-gray-900">Rafi Sheikh</h3>
                     <p class="text-blue-600 font-medium mb-4">Principal</p>
                     <p id="principal-message" class="text-gray-600 leading-relaxed">
-                        "Education is not just about acquiring knowledge, but about shaping character and building a foundation for a lifetime of learning. We are dedicated to nurturing every student's potential and preparing them to face the challenges of tomorrow with confidence and integrity."
+                        <!-- Content will be populated by Firestore -->
                     </p>
                 </div>
                 <!-- Director's Message -->
@@ -197,7 +197,7 @@
                     <h3 class="text-2xl font-semibold text-gray-900">Rafi Sheikh</h3>
                     <p class="text-blue-600 font-medium mb-4">Director</p>
                     <p id="director-message" class="text-gray-600 leading-relaxed">
-                        "Our vision is to empower students to become leaders who are not only academically brilliant but also socially responsible. We aim to instill a global perspective while staying true to our cultural roots, ensuring our students are well-rounded and ready to make a positive impact on the world."
+                        <!-- Content will be populated by Firestore -->
                     </p>
                 </div>
             </div>
@@ -212,7 +212,7 @@
                     <img src="https://i.ibb.co/ZvpmPB9/pexels-pixabay-159775.jpg" alt="Vision Image" class="w-full h-72 object-cover rounded-2xl mb-6">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision</h3>
                     <p id="vision-text" class="text-gray-600 leading-relaxed">
-                        We aspire to develop socially conscious citizens of tomorrow who will provide leadership in all walks of life.
+                        <!-- Content will be populated by Firestore -->
                     </p>
                 </div>
                 <!-- Our Mission -->
@@ -220,7 +220,7 @@
                     <img src="https://i.ibb.co/Y49wBz3P/pexels-pavel-danilyuk-7944238.jpg" alt="Mission Image" class="w-full h-72 object-cover rounded-2xl mb-6">
                     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Mission</h3>
                     <p id="mission-text" class="text-gray-600 leading-relaxed">
-                        Shaping Indian souls with a Global vision.
+                        <!-- Content will be populated by Firestore -->
                     </p>
                 </div>
             </div>
@@ -241,18 +241,22 @@
             <div class="grid md:grid-cols-2 gap-12">
                 <!-- Total Students -->
                 <div class="p-10 bg-white/10 rounded-3xl card backdrop-blur-md">
-                    <div id="total-students" class="text-6xl md:text-8xl font-extrabold mb-4">550+</div>
+                    <div id="total-students" class="text-6xl md:text-8xl font-extrabold mb-4">
+                        <!-- Content will be populated by Firestore -->
+                    </div>
                     <h3 class="text-xl font-semibold mb-2">Total Students</h3>
                     <p id="total-students-text" class="text-gray-200">
-                        Rafi University started with 105 students and at present, we have more than 550 students.
+                        <!-- Content will be populated by Firestore -->
                     </p>
                 </div>
                 <!-- Passout Students -->
                 <div class="p-10 bg-white/10 rounded-3xl card backdrop-blur-md">
-                    <div id="passout-students" class="text-6xl md:text-8xl font-extrabold mb-4">36</div>
+                    <div id="passout-students" class="text-6xl md:text-8xl font-extrabold mb-4">
+                        <!-- Content will be populated by Firestore -->
+                    </div>
                     <h3 class="text-xl font-semibold mb-2">Passout Students</h3>
                     <p id="passout-students-text" class="text-gray-200">
-                        In the past three years, 36 students have successfully passed out from the 10th grade at Rafi University.
+                        <!-- Content will be populated by Firestore -->
                     </p>
                 </div>
             </div>
@@ -480,7 +484,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, collection, query, addDoc, deleteDoc, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, onSnapshot, collection, query, addDoc, deleteDoc, orderBy, getDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
         import { setLogLevel } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
         setLogLevel('debug');
 
@@ -643,30 +647,37 @@
         function fetchWebsiteContent() {
             const contentDocRef = getWebsiteContentDocPath();
             onSnapshot(contentDocRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    introTextEl.textContent = data.intro || "Loading...";
-                    principalMessageEl.textContent = data.principalMessage || "Loading...";
-                    directorMessageEl.textContent = data.directorMessage || "Loading...";
-                    visionTextEl.textContent = data.vision || "Loading...";
-                    missionTextEl.textContent = data.mission || "Loading...";
-                    totalStudentsEl.textContent = (data.totalStudents || "0") + "+";
-                    totalStudentsTextEl.textContent = data.totalStudentsText || "Loading...";
-                    passoutStudentsEl.textContent = data.passoutStudents || "0";
-                    passoutStudentsTextEl.textContent = data.passoutStudentsText || "Loading...";
-                    
-                    // Populate admin form
-                    websiteContentFormEl['update-intro'].value = data.intro || '';
-                    websiteContentFormEl['update-principal'].value = data.principalMessage || '';
-                    websiteContentFormEl['update-director'].value = data.directorMessage || '';
-                    websiteContentFormEl['update-vision'].value = data.vision || '';
-                    websiteContentFormEl['update-mission'].value = data.mission || '';
-                    websiteContentFormEl['update-total-students'].value = data.totalStudents || '';
-                    websiteContentFormEl['update-passout-students'].value = data.passoutStudents || '';
+                const defaultContent = {
+                    intro: "Rafi University stands as a beacon of academic excellence and holistic development. Our commitment is to foster a dynamic learning environment where students can thrive, innovate, and lead. We believe in providing a comprehensive education that goes beyond textbooks, preparing our students to be compassionate, responsible, and globally-minded citizens. Our dedicated faculty, state-of-the-art facilities, and vibrant campus life create the perfect ecosystem for intellectual growth and personal enrichment.",
+                    principalMessage: "\"Education is not just about acquiring knowledge, but about shaping character and building a foundation for a lifetime of learning. We are dedicated to nurturing every student's potential and preparing them to face the challenges of tomorrow with confidence and integrity.\"",
+                    directorMessage: "\"Our vision is to empower students to become leaders who are not only academically brilliant but also socially responsible. We aim to instill a global perspective while staying true to our cultural roots, ensuring our students are well-rounded and ready to make a positive impact on the world.\"",
+                    vision: "We aspire to develop socially conscious citizens of tomorrow who will provide leadership in all walks of life.",
+                    mission: "Shaping Indian souls with a Global vision.",
+                    totalStudents: "550",
+                    passoutStudents: "36"
+                };
 
-                } else {
-                    console.log("No such document for website content!");
-                }
+                const data = docSnap.exists() ? docSnap.data() : defaultContent;
+                
+                introTextEl.textContent = data.intro;
+                principalMessageEl.textContent = data.principalMessage;
+                directorMessageEl.textContent = data.directorMessage;
+                visionTextEl.textContent = data.vision;
+                missionTextEl.textContent = data.mission;
+                totalStudentsEl.textContent = (data.totalStudents || "0") + "+";
+                totalStudentsTextEl.textContent = `Rafi University started with 105 students and at present, we have more than ${data.totalStudents || "0"} students.`;
+                passoutStudentsEl.textContent = data.passoutStudents || "0";
+                passoutStudentsTextEl.textContent = `In the past three years, ${data.passoutStudents || "0"} students have successfully passed out from the 10th grade at Rafi University.`;
+                
+                // Populate admin form
+                websiteContentFormEl['update-intro'].value = data.intro;
+                websiteContentFormEl['update-principal'].value = data.principalMessage;
+                websiteContentFormEl['update-director'].value = data.directorMessage;
+                websiteContentFormEl['update-vision'].value = data.vision;
+                websiteContentFormEl['update-mission'].value = data.mission;
+                websiteContentFormEl['update-total-students'].value = data.totalStudents;
+                websiteContentFormEl['update-passout-students'].value = data.passoutStudents;
+
             }, (error) => {
                 console.error("Error fetching website content:", error);
             });
@@ -685,8 +696,6 @@
                     mission: websiteContentFormEl['update-mission'].value,
                     totalStudents: websiteContentFormEl['update-total-students'].value,
                     passoutStudents: websiteContentFormEl['update-passout-students'].value,
-                    totalStudentsText: "Rafi University started with 105 students and at present, we have more than " + websiteContentFormEl['update-total-students'].value + " students.",
-                    passoutStudentsText: "In the past three years, " + websiteContentFormEl['update-passout-students'].value + " students have successfully passed out from the 10th grade at Rafi University.",
                     updatedAt: new Date()
                 }, { merge: true });
                 showModal("Website content updated successfully!");
