@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafi University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+        .carousel-item { display: none; }
+        .carousel-item.active { display: block; }
+        [data-loading] { display: none; }
+        .skeleton {
+            background-color: #e2e8f0;
+            border-radius: 0.5rem;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-white sticky top-0 z-50 shadow-lg p-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="https://i.ibb.co/r2tP3wzb/Blue-Modern-Initials-Letter-A-University-Logo.png" alt="Rafi University Logo" class="h-10 w-10 rounded-full">
+                <h1 class="text-2xl font-bold text-gray-900">Rafi University</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-gray-600 font-medium">
+                <a href="#intro" class="hover:text-blue-600 transition-colors">About Us</a>
+                <a href="#messages" class="hover:text-blue-600 transition-colors">Messages</a>
+                <a href="#vision" class="hover:text-blue-600 transition-colors">Our Vision</a>
+                <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+                <a href="#numbers" class="hover:text-blue-600 transition-colors">Statistics</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4">
+        <nav class="flex flex-col items-center space-y-4 text-gray-600 font-medium">
+            <a href="#intro" class="hover:text-blue-600 transition-colors">About Us</a>
+            <a href="#messages" class="hover:text-blue-600 transition-colors">Messages</a>
+            <a href="#vision" class="hover:text-blue-600 transition-colors">Our Vision</a>
+            <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+            <a href="#numbers" class="hover:text-blue-600 transition-colors">Statistics</a>
+        </nav>
+    </div>
+
+    <!-- Banner Carousel -->
+    <section id="hero" class="relative w-full overflow-hidden h-[60vh] md:h-[80vh] bg-gray-200">
+        <div id="carousel-container" class="carousel-container absolute inset-0">
+            <!-- Images will be loaded here dynamically -->
+        </div>
+        <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 text-center">
+            <div class="space-y-6">
+                <h2 id="hero-title" class="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
+                    <!-- Title Loaded from DB -->
+                </h2>
+                <a href="#intro" class="inline-block px-8 py-3 rounded-full text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors transform hover:scale-105">
+                    Discover More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-16 space-y-24">
+
+        <!-- Introduction Section -->
+        <section id="intro" class="flex flex-col lg:flex-row items-center gap-12">
+            <div class="lg:w-1/2">
+                <img id="about-us-image" src="" alt="Introduction Image" class="w-full h-full object-cover rounded-3xl shadow-lg skeleton min-h-[300px]">
+            </div>
+            <div class="lg:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">About Us</h2>
+                <p id="about-us-text" class="text-gray-700 leading-relaxed text-lg">
+                    <span class="skeleton block h-6 w-full mb-2"></span>
+                    <span class="skeleton block h-6 w-3/4"></span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Leadership Messages -->
+        <section id="messages" class="space-y-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">Messages from Leadership</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Principal's Message -->
+                <div class="card p-8 bg-white rounded-3xl text-center flex flex-col items-center">
+                    <img id="principal-image" src="" alt="Principal" class="w-36 h-36 md:w-48 md:h-48 rounded-full mb-6 object-cover border-4 border-blue-400 skeleton">
+                    <h3 id="principal-name" class="text-2xl font-semibold text-gray-900"><span class="skeleton block h-8 w-48 mx-auto"></span></h3>
+                    <p id="principal-title" class="text-blue-600 font-medium mb-4"><span class="skeleton block h-6 w-24 mx-auto"></span></p>
+                    <p id="principal-message" class="text-gray-600 leading-relaxed"><span class="skeleton block h-5 w-full mb-2"></span><span class="skeleton block h-5 w-5/6 mx-auto"></span></p>
+                </div>
+                <!-- Director's Message -->
+                <div class="card p-8 bg-white rounded-3xl text-center flex flex-col items-center">
+                    <img id="director-image" src="" alt="Director" class="w-36 h-36 md:w-48 md:h-48 rounded-full mb-6 object-cover border-4 border-blue-400 skeleton">
+                    <h3 id="director-name" class="text-2xl font-semibold text-gray-900"><span class="skeleton block h-8 w-48 mx-auto"></span></h3>
+                    <p id="director-title" class="text-blue-600 font-medium mb-4"><span class="skeleton block h-6 w-24 mx-auto"></span></p>
+                    <p id="director-message" class="text-gray-600 leading-relaxed"><span class="skeleton block h-5 w-full mb-2"></span><span class="skeleton block h-5 w-5/6 mx-auto"></span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vision & Mission Section -->
+        <section id="vision" class="space-y-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">Our Vision & Mission</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Our Vision -->
+                <div class="p-8 bg-white rounded-3xl card flex flex-col items-center text-center">
+                    <img id="vision-image" src="" alt="Vision Image" class="w-full h-64 object-cover rounded-2xl mb-6 skeleton">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Vision</h3>
+                    <p id="vision-text" class="text-gray-600 leading-relaxed"><span class="skeleton block h-6 w-3/4 mx-auto"></span></p>
+                </div>
+                <!-- Our Mission -->
+                <div class="p-8 bg-white rounded-3xl card flex flex-col items-center text-center">
+                    <img id="mission-image" src="" alt="Mission Image" class="w-full h-64 object-cover rounded-2xl mb-6 skeleton">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Our Mission</h3>
+                    <p id="mission-text" class="text-gray-600 leading-relaxed"><span class="skeleton block h-6 w-3/4 mx-auto"></span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Features Section -->
+        <section id="features" class="space-y-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">Our Special Features</h2>
+            <div id="features-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                 <!-- Features will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Our Numbers Speak Section -->
+        <section id="numbers" class="space-y-12 text-center py-16 px-4 bg-blue-600 rounded-3xl text-white">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Our Numbers Speak</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Total Students -->
+                <div class="p-8 bg-white/10 rounded-3xl card backdrop-blur-md">
+                    <div id="stats-students-number" class="text-5xl md:text-7xl font-extrabold mb-4"><span class="skeleton block h-16 w-32 mx-auto"></span></div>
+                    <h3 class="text-xl font-semibold mb-2">Total Students</h3>
+                    <p id="stats-students-text" class="text-gray-200"><span class="skeleton block h-5 w-full mb-2"></span></p>
+                </div>
+                <!-- Passout Students -->
+                <div class="p-8 bg-white/10 rounded-3xl card backdrop-blur-md">
+                    <div id="stats-passout-number" class="text-5xl md:text-7xl font-extrabold mb-4"><span class="skeleton block h-16 w-24 mx-auto"></span></div>
+                    <h3 class="text-xl font-semibold mb-2">Passout Students</h3>
+                    <p id="stats-passout-text" class="text-gray-200"><span class="skeleton block h-5 w-full mb-2"></span></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white p-8 mt-12 text-center rounded-t-3xl">
+        <p>&copy; 2025 Rafi University. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBDfUlGCHgBjGWNlLQcrRio5xaBjEadRkQ",
+            authDomain: "video-of-fan.firebaseapp.com",
+            projectId: "video-of-fan",
+            storageBucket: "video-of-fan.appspot.com",
+            messagingSenderId: "60721213995",
+            appId: "1:60721213995:web:019d65235e3089bd02b06e",
+            measurementId: "G-MQQDH704K2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Reference to the document that holds the website content
+        const contentRef = doc(db, "websiteContent", "mainPage");
+        
+        // Listen for real-time updates
+        onSnapshot(contentRef, (doc) => {
+            if (doc.exists()) {
+                const data = doc.data();
+                updatePageContent(data);
+            } else {
+                console.log("No content document found! Please save content from the admin panel.");
+            }
+        });
+
+        function updatePageContent(data) {
+            const updateText = (id, value) => {
+                const el = document.getElementById(id);
+                if (el) el.innerHTML = value || '';
+            };
+            
+            const updateImage = (id, value) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.src = value || '';
+                    el.classList.remove('skeleton');
+                }
+            };
+            
+            updateText('hero-title', data.heroTitle);
+            const carouselContainer = document.getElementById('carousel-container');
+            if(carouselContainer && data.carouselImages) {
+                carouselContainer.innerHTML = '';
+                data.carouselImages.forEach((src, index) => {
+                    const item = document.createElement('div');
+                    item.className = `carousel-item absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === 0 ? 'opacity-100 active' : 'opacity-0'}`;
+                    item.innerHTML = `<img src="${src}" alt="University Scenery" class="w-full h-full object-cover">`;
+                    carouselContainer.appendChild(item);
+                });
+                startCarousel();
+            }
+
+            updateImage('about-us-image', data.aboutUsImage);
+            updateText('about-us-text', data.aboutUsText);
+
+            updateImage('principal-image', data.principalImage);
+            updateText('principal-name', data.principalName);
+            updateText('principal-title', data.principalTitle);
+            updateText('principal-message', data.principalMessage);
+
+            updateImage('director-image', data.directorImage);
+            updateText('director-name', data.directorName);
+            updateText('director-title', data.directorTitle);
+            updateText('director-message', data.directorMessage);
+            
+            updateImage('vision-image', data.visionImage);
+            updateText('vision-text', data.visionText);
+            updateImage('mission-image', data.missionImage);
+            updateText('mission-text', data.missionText);
+
+            updateText('stats-students-number', data.statsStudentsNumber);
+            updateText('stats-students-text', data.statsStudentsText);
+            updateText('stats-passout-number', data.statsPassoutNumber);
+            updateText('stats-passout-text', data.statsPassoutText);
+
+            const featuresGrid = document.getElementById('features-grid');
+            if (featuresGrid && data.features) {
+                featuresGrid.innerHTML = '';
+                data.features.forEach(feature => {
+                    const featureEl = document.createElement('div');
+                    featureEl.className = 'bg-blue-50 p-6 rounded-2xl flex items-start space-x-4 shadow-sm';
+                    featureEl.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                        <p class="text-gray-800 font-medium">${feature}</p>
+                    `;
+                    featuresGrid.appendChild(featureEl);
+                });
+            }
+        }
+
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        let carouselInterval;
+        function startCarousel() {
+            if(carouselInterval) clearInterval(carouselInterval);
+
+            const container = document.getElementById('carousel-container');
+            if (!container) return;
+
+            const items = container.querySelectorAll('.carousel-item');
+            if (items.length <= 1) return;
+
+            let currentIndex = 0;
+            carouselInterval = setInterval(() => {
+                items[currentIndex].classList.remove('active', 'opacity-100');
+                items[currentIndex].classList.add('opacity-0');
+                
+                currentIndex = (currentIndex + 1) % items.length;
+                
+                items[currentIndex].classList.add('active', 'opacity-100');
+                items[currentIndex].classList.remove('opacity-0');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
+
+
